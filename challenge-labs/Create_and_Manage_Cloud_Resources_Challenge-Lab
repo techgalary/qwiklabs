@@ -1,3 +1,112 @@
-Task 1. Create a project jumphost instance 
-Steps:
-1. 
+Set Environment Variables
+
+export INSTANCE_NAME=nucleus-jumphost-539
+export ZONE=us-east1-d
+export REGION=us-east1
+export PORT=8080
+export FIREWALL_NAME=grant-tcp-rule-470
+
+Note: Update the values as per the details in your lab
+=====================================================   Task 1===================================================
+
+Task 1. Create a project jump host instance
+Solution:
+
+gcloud compute instances create $INSTANCE_NAME \
+--network nucleus-vpc \
+--zone $ZONE \
+--machine-type f1-micro \
+--image-family debian-10 \
+--image-project debian-cloud
+
+=====================================================  Task 2  ==================================================
+
+Task 2. Create a Kubernetes service cluster
+Solution:
+
+1. Create a zonal cluster using us-east1-d.
+
+gcloud container clusters create appcluster \
+--num-nodes 1 \
+--network nucleus-vpc \
+--zone $ZONE
+
+2. Use the Docker container hello-app (gcr.io/google-samples/hello-app:2.0) as a placeholder.
+Solution:
+
+gcloud container clusters get-credentials appcluster \
+--zone $ZONE
+
+kubectl create deployment helloapp-server \
+--image=gcr.io/google-samples/hello-app:2.0
+
+3. Expose the app on port App port number.
+
+kubectl expose deployment helloapp-server \
+--type=LoadBalancer \
+--port $PORT
+
+=========================================================== Task 3 =======================================================
+
+Task 3. Set up an HTTP load balancer
+Solution:
+1. Create an instance template.
+gcloud compute instance-templates create appserve-temp \
+--metadata-from-file startup-script=startup.sh \
+--network nucleus-vpc \
+--machine-type g1-small \
+--region $ZONE
+
+2.  Create a target pool.
+gcloud compute target-pools create nginx-pool --region=$REGION
+
+3. Create a managed instance group.
+gcloud compute instance-groups managed create appserve-group \
+--base-instance-name appserve \
+--size 2 \
+--template appserve-temp \
+--region $REGION
+
+4. Create a firewall rule named as accept-tcp-rule-496 to allow traffic (80/tcp).
+gcloud compute firewall-rules create $FIREWALL_NAME \
+--allow tcp:80 \
+--network nucleus-vpc
+
+5. Create a health check.
+gcloud compute http-health-checks create http-basic-check
+
+gcloud compute instance-groups managed \
+set-named-ports appserve-group \
+--named-ports http:80 \
+--region $REGION
+
+6. Create a backend service, and attach the managed instance group with named port (http:80).
+gcloud compute backend-services create appserve-backend \
+--protocol HTTP \
+--http-health-checks http-basic-check \
+--global
+
+gcloud compute backend-services add-backend appserve-backend \
+--instance-group appserve-group \
+--instance-group-region $REGION \
+--global
+
+7. Create a URL map, and target the HTTP proxy to route requests to your URL map.
+gcloud compute url-maps create appserve-map \
+--default-service appserve-backend
+
+gcloud compute target-http-proxies create http-lb-proxy \
+--url-map appserve-map
+
+8. Create a forwarding rule.
+gcloud compute forwarding-rules create http-content-rule \
+--global \
+--target-http-proxy http-lb-proxy \
+--ports 80
+
+gcloud compute forwarding-rules create $FIREWALL_NAME \
+--global \
+--target-http-proxy http-lb-proxy \
+--ports 80
+
+gcloud compute forwarding-rules list
