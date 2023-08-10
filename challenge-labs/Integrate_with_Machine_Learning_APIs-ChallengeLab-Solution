@@ -31,9 +31,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/$SERVICE_ACCOUNT-key.json
 
 Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API
 
-gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py .
-
-updated file can be found at this location 
+gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py . 
 
 sed -i "s/'en'/'${LOCAL}'/g" analyze-images-v2.py
 
