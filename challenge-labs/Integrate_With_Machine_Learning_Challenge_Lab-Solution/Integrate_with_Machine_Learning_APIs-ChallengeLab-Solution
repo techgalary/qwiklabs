@@ -32,11 +32,11 @@ export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/$SERVICE_ACCOUNT-key.json
 Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API
 
 gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py . 
+NOTE:  [You can also run wget https://raw.githubusercontent.com/techgalary/qwiklabs/main/challenge-labs/Integrate_With_Machine_Learning_Challenge_Lab-Solution/analyze-images-v2.py] - This contains updated Python file
 
 sed -i "s/'en'/'${LOCAL}'/g" analyze-images-v2.py
 
-python3 analyze-images-v2.py $DEVSHELL_PROJECT_ID qwiklabs-gcp-01-5c7412d19782
-
+python3 analyze-images-v2.py $DEVSHELL_PROJECT_ID <PROVIDE BUCKET NAME HERE>
 
 
 ============================================================TASK 5 =====================================================
