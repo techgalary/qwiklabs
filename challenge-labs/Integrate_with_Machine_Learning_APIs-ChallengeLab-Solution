@@ -1,42 +1,44 @@
 Export Variables
 
-export LANGUAGE=<Update as per the lab>
-export LOCAL=<Update as per the lab>
-export BIGQUERY_ROLE=<Update as per the lab>
-export CLOUD_STORAGE_ROLE=<Update as per the lab>
+export LANGUAGE=<Update as per lab>
+export LOCALE=<Update as per lab>
+export BIGQUERY_ROLE=<Update as per lab>
+export CLOUD_STORAGE_ROLE=<Update as per lab>
+export SERVICE_ACCOUNT=<provide some name here>
 
 ============================================================TASK 1=====================================================
 
 Task 1. Configure a service account to access the Machine Learning APIs, BigQuery, and Cloud Storage
 
-gcloud iam service-accounts create sample-sa
+gcloud iam service-accounts create $SERVICE_ACCOUNT
 
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:sample-sa@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$BIGQUERY_ROLE
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$BIGQUERY_ROLE
 
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:sample-sa@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$CLOUD_STORAGE_ROLE
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$CLOUD_STORAGE_ROLE
 
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:sample-sa@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=roles/serviceusage.serviceUsageConsumer
-
-gcloud iam service-accounts keys create sample-sa-key.json --iam-account sample-sa@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=roles/serviceusage.serviceUsageConsumer
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ============================================================TASK 2 =====================================================
 
 Task 2. Create and download a credential file for your service account
 
-export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/sample-sa-key.json
+gcloud iam service-accounts keys create $SERVICE_ACCOUNT-key.json --iam-account $SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com
+
+export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/$SERVICE_ACCOUNT-key.json
 
 ============================================================TASK 3 & 4 =====================================================
 
 Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API
 
-wget https://raw.githubusercontent.com/guys-in-the-cloud/cloud-skill-boosts/main/Challenge-labs/Integrate%20with%20Machine%20Learning%20APIs%3A%20Challenge%20Lab/analyze-images-v2.py
+gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py .
+
+updated file can be found at this location 
 
 sed -i "s/'en'/'${LOCAL}'/g" analyze-images-v2.py
 
-python3 analyze-images-v2.py
+python3 analyze-images-v2.py $DEVSHELL_PROJECT_ID qwiklabs-gcp-01-5c7412d19782
 
-python3 analyze-images-v2.py $DEVSHELL_PROJECT_ID $DEVSHELL_PROJECT_ID
 
 
 ============================================================TASK 5 =====================================================
