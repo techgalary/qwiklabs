@@ -1,0 +1,13 @@
+gsutil mb -p qwiklabs-gcp-03-7a9f9add1b9c   -c STANDARD   -l US gs://qwiklabs-gcp-03-7a9f9add1b9c/
+
+bq --location=US mk --dataset qwiklabs-gcp-03-7a9f9add1b9c:sensors_545
+
+bq mk --table qwiklabs-gcp-03-7a9f9add1b9c:sensors_545.temperature_409 data:STRING
+
+gcloud pubsub topics create sensors-temp-72484  --project=qwiklabs-gcp-03-7a9f9add1b9c
+
+gcloud pubsub subscriptions create sensors-temp-72484-sub  --topic=sensors-temp-72484  --project=qwiklabs-gcp-03-7a9f9add1b9c
+
+gcloud pubsub topics publish sensors-temp-72484  --message '{"data": "73.4 F"}'
+
+SELECT * FROM `qwiklabs-gcp-03-7a9f9add1b9c.sensors_545.temperature_409`
