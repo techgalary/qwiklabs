@@ -32,8 +32,8 @@ echo "Creating Pub/Sub event trigger: $TRIGGER_NAME"
 gcloud eventarc triggers create $TRIGGER_NAME \
   --destination-run-service=$CLOUD_RUN_SERVICE \
   --destination-run-region=$REGION \
+  --event-filters="type=google.cloud.pubsub.topic.v1.messagePublished" 
   --transport-topic=projects/$PROJECT_ID/topics/$TOPIC_NAME
-
 
 echo "Publishing a test message to the Pub/Sub topic: $TOPIC_NAME"
 gcloud pubsub topics publish $TOPIC_NAME --message="Hello, Cloud Run!"
