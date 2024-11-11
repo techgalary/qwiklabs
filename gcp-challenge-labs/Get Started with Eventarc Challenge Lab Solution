@@ -1,0 +1,28 @@
+*******Note: Replace the resource names as per the lab************
+
+gcloud pubsub topics create qwiklabs-gcp-03-a28982f56c6f-topic 
+
+gcloud pubsub subscriptions create qwiklabs-gcp-03-a28982f56c6f-topic-sub  --topic=qwiklabs-gcp-03-a28982f56c6f-topic
+
+gcloud pubsub topics list
+gcloud pubsub subscriptions list
+
+gcloud run deploy pubsub-events \
+--image=gcr.io/cloudrun/hello \
+--platform=managed \
+--region=us-east4 \
+--allow-unauthenticated
+
+gcloud run services list
+
+gcloud eventarc triggers create pubsub-events-trigger \
+--location=us-east4 \
+--destination-run-service=pubsub-events \
+--destination-run-region=us-east4 \
+--event-filters="type=google.cloud.pubsub.topic.v1.messagePublished" \
+--transport-topic=projects/qwiklabs-gcp-03-a28982f56c6f/topics/qwiklabs-gcp-03-a28982f56c6f-topic
+
+gcloud eventarc triggers list
+
+gcloud pubsub topics publish qwiklabs-gcp-03-a28982f56c6f-topic  --message="Hello, Cloud!"
+
