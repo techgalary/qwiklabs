@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-# Task 1 Creation of AlloyDB cluster
+# Task 1: Creation of AlloyDB cluster
 gcloud beta alloydb clusters create "$CLUSTER_NAME" \
     --password="$PASSWORD" \
     --network="$NETWORK" \
@@ -15,7 +14,7 @@ else
     exit 1
 fi
 
-# Task1 Create the primary instance
+# Task 1: Create the primary instance
 gcloud beta alloydb instances create "$PRIMARY_INSTANCE_NAME" \
     --instance-type=PRIMARY \
     --cpu-count="$CPU_COUNT" \
@@ -30,8 +29,7 @@ else
     exit 1
 fi
 
-
-# Task2 Connect to the AlloyDB instance and create tables
+# Task 2: Connect to the AlloyDB instance and create tables
 echo "Connecting to AlloyDB instance to create tables..."
 export ALLOYDB="$ALLOYDB_ADDRESS"
 echo $ALLOYDB > alloydbip.txt
@@ -67,8 +65,7 @@ else
     exit 1
 fi
 
-#Task 3 Load simple datasets into tables
-
+# Task 3: Load simple datasets into tables
 echo "Loading data into tables..."
 
 psql -h $ALLOYDB -U postgres <<EOF
@@ -108,15 +105,14 @@ else
     exit 1
 fi
 
-# Task 4 Create a Read Pool instance
-gcloud alloydb instances create "$READPOOL_NAME" \
-  --cluster="$CLUSTER_NAME" \
-  --instance-type=READ_POOL \
-  --region="$REGION" \
-  --cpu-count=4 \
-  --storage-size="$STORAGE_SIZE" \
-  --network="$NETWORK" \
-  --project="$PROJECT_ID"
+# Task 4: Create a Read Pool instance
+gcloud beta alloydb instances create $READPOOL_INSTANCE_NAME \
+    --instance-type=READ_POOL \
+    --cpu-count=2 \
+    --read-pool-node-count=2 \
+    --region="$REGION" \
+    --cluster="$CLUSTER_NAME" \
+    --project="$PROJECT_ID"
 
 if [ $? -eq 0 ]; then
     echo "Read pool instance $READPOOL_NAME created successfully."
@@ -125,7 +121,7 @@ else
     exit 1
 fi
 
-# Task 5 Create a backup
+# Task 5: Create a backup
 gcloud beta alloydb backups create "$BACKUP_ID" \
     --cluster="$CLUSTER_NAME" \
     --region="$REGION" \
@@ -137,4 +133,3 @@ else
     echo "Failed to create backup $BACKUP_ID. Check for errors and try again."
     exit 1
 fi
-
