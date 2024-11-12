@@ -19,6 +19,17 @@ PRIMARY_INSTANCE_NAME="lab-instance"  # Replace with the instance name from Task
 READPOOL_INSTANCE_NAME=""   # Replace with the Readpool instance name from the lab
 BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
 CPU_COUNT=2                 # Adjust the CPU count if necessary
+```
+### Download and Execute the Script ###
+
+# Download the script from the repository
+curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/managealloydb.sh
+
+# Make the script executable
+sudo chmod +x managealloydb.sh
+
+# Run the script
+./managealloydb.sh
 
 
 
