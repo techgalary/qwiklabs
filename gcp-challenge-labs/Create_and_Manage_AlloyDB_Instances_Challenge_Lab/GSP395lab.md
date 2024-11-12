@@ -20,10 +20,6 @@ READPOOL_INSTANCE_NAME=""   # Replace with the Readpool instance name from the l
 BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
 CPU_COUNT=2                 # Adjust the CPU count if necessary
 
-```bash
-
-
-### Set the Environment Variables #######
 
 
 
