@@ -28,7 +28,20 @@ else
     echo "Failed to create primary instance $PRIMARY_INSTANCE_NAME. Check for errors and try again."
     exit 1
 fi
+# Retrieve the private IP address of the AlloyDB primary instance
+echo "Retrieving private IP address of the primary instance..."
+ALLOYDB_ADDRESS=$(gcloud beta alloydb instances describe "$PRIMARY_INSTANCE_NAME" \
+    --region="$REGION" \
+    --cluster="$CLUSTER_NAME" \
+    --project="$PROJECT_ID" \
+    --format="get(ipAddresses[0].ipAddress)")
 
+if [ -n "$ALLOYDB_ADDRESS" ]; then
+    echo "Retrieved AlloyDB IP address: $ALLOYDB_ADDRESS"
+else
+    echo "Failed to retrieve the IP address of the primary instance."
+    exit 1
+fi
 # Task 2: Connect to the AlloyDB instance and create tables
 echo "Connecting to AlloyDB instance to create tables..."
 export ALLOYDB="$ALLOYDB_ADDRESS"
