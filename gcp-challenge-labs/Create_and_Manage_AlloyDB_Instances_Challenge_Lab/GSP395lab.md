@@ -21,7 +21,7 @@ BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
 CPU_COUNT=2                 # Adjust the CPU count if necessary
 ```
 ### Download and Execute the Script ###
-
+```bash
 # Download the script from the repository
 curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/managealloydb.sh
 
@@ -30,7 +30,7 @@ sudo chmod +x managealloydb.sh
 
 # Run the script
 ./managealloydb.sh
-
+```
 
 
 
