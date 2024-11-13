@@ -1,4 +1,4 @@
-Export Variables
+### Export Environment Variables ###
 
 export LANGUAGE=<Update as per lab>
 export LOCALE=<Update as per lab>
@@ -6,8 +6,8 @@ export BIGQUERY_ROLE=<Update as per lab>
 export CLOUD_STORAGE_ROLE=<Update as per lab>
 export SERVICE_ACCOUNT=<provide some name here>
 
-============================================================TASK 1=====================================================
-
+### Task 1 ###
+``` bash
 Task 1. Configure a service account to access the Machine Learning APIs, BigQuery, and Cloud Storage
 
 gcloud iam service-accounts create $SERVICE_ACCOUNT
@@ -18,17 +18,19 @@ gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAcco
 
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=roles/serviceusage.serviceUsageConsumer
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-============================================================TASK 2 =====================================================
+```
+### Task 2 ###
 
+``` bash
 Task 2. Create and download a credential file for your service account
 
 gcloud iam service-accounts keys create $SERVICE_ACCOUNT-key.json --iam-account $SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com
 
 export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/$SERVICE_ACCOUNT-key.json
 
-============================================================TASK 3 & 4 =====================================================
-
+```
+### Task 3 and 4 ####
+```bash
 Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API
 
 gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py . 
@@ -38,7 +40,11 @@ sed -i "s/'en'/'${LOCAL}'/g" analyze-images-v2.py
 
 python3 analyze-images-v2.py $DEVSHELL_PROJECT_ID <PROVIDE BUCKET NAME HERE>
 
+```
+### Task 5 ###
 
-============================================================TASK 5 =====================================================
+```bash
 
 bq query --use_legacy_sql=false "SELECT locale,COUNT(locale) as lcount FROM image_classification_dataset.image_text_detail GROUP BY locale ORDER BY lcount DESC"
+
+```
