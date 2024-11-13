@@ -94,7 +94,57 @@ INSERT INTO regions VALUES
 (3, 'Asia'), 
 (4, 'Middle East and Africa');
 ---
-### Load Data to Regions Table ###
+### Load Data to Countries Table ###
+INSERT INTO countries VALUES 
+('IT', 'Italy', 1), 
+('JP', 'Japan', 3), 
+('US', 'United States of America', 2), 
+('CA', 'Canada', 2), 
+('CN', 'China', 3), 
+('IN', 'India', 3), 
+('AU', 'Australia', 3), 
+('ZW', 'Zimbabwe', 4), 
+('SG', 'Singapore', 3);
+---
+### Load data into the departments table ###
+INSERT INTO departments VALUES 
+(10, 'Administration', 200, 1700), 
+(20, 'Marketing', 201, 1800), 
+(30, 'Purchasing', 114, 1700), 
+(40, 'Human Resources', 203, 2400), 
+(50, 'Shipping', 121, 1500), 
+(60, 'IT', 103, 1400);
+```
+
+### Verify the Data Loaded into Table ###
+```bash
+### Check regions table ###
+SELECT * FROM regions;
+---
+### Check countries table ###
+SELECT * FROM countries;
+---
+### Check departments table ###
+SELECT * FROM departments;
+```
+### Task 4. Create a Read Pool instance ###
+```bash
+gcloud alloydb instances create "$READPOOL_NAME" \
+  --cluster="$CLUSTER_NAME" \
+  --instance-type=READ_POOL \
+  --region="$REGION" \
+  --cpu-count=4 \
+  --storage-size="$STORAGE_SIZE" \
+  --network="$NETWORK" \
+  --project="$PROJECT_ID"
+```
+### Task 5. Create a backup ###
+``` bash
+gcloud beta alloydb backups create "$BACKUP_ID" \
+    --cluster="$CLUSTER_NAME" \
+    --region="$REGION" \
+    --project="$PROJECT_ID"
+```
 
 
 
