@@ -16,8 +16,8 @@ export NETWORK="peering-network"   # Replace with the network name as needed
 export PROJECT_ID="QWIKLABS_PROJECT_ID"  # Replace with your Qwiklabs Project ID
 export PASSWORD="Change3Me"        # Replace with your password as needed
 export PRIMARY_INSTANCE_NAME="lab-instance"  # Replace with the instance name from Task 1
-export READPOOL_INSTANCE_NAME=""   # Replace with the Readpool instance name from the lab
-export BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
+export READPOOL_INSTANCE_NAME="lab-instance-rp1"   # Replace with the Readpool instance name from the lab
+export BACKUP_ID="lab-backup"  # Replace with the Backup ID provided in the lab
 export CPU_COUNT=2                 # Adjust the CPU count if necessary
 ```
 ### Task 1. Download and Execute the Script to Create Cluster and Instance ###
@@ -40,7 +40,7 @@ gcloud beta alloydb clusters create $CLUSTER_NAME \
     --project=$PROJECT_ID
 ```
 ```bash
-gcloud beta alloydb instances create $RIMARY_INSTANCE_NAME \
+gcloud beta alloydb instances create $PRIMARY_INSTANCE_NAME \
     --instance-type=PRIMARY \
     --cpu-count=2 \
     --region=$REGION  \
@@ -133,13 +133,12 @@ SELECT * FROM departments;
 ```
 ### Task 4. Create a Read Pool instance ###
 ```bash
-gcloud alloydb instances create "$READPOOL_NAME" \
+gcloud beta alloydb instances create "$READPOOL_INSTANCE_NAME" \
   --cluster="$CLUSTER_NAME" \
   --instance-type=READ_POOL \
+  --read-pool-node-count=2 \
   --region="$REGION" \
-  --cpu-count=4 \
-  --storage-size="$STORAGE_SIZE" \
-  --network="$NETWORK" \
+  --cpu-count=2 \
   --project="$PROJECT_ID"
 ```
 ### Task 5. Create a backup ###
