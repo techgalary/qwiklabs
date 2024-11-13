@@ -20,7 +20,7 @@ export READPOOL_INSTANCE_NAME=""   # Replace with the Readpool instance name fro
 export BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
 export CPU_COUNT=2                 # Adjust the CPU count if necessary
 ```
-### Download and Execute the Script to Create Cluster and Instance-Task 1 ###
+### Task 1. Download and Execute the Script to Create Cluster and Instance ###
 ```bash
 # Download the script from the repository
 curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/instancecreation.sh
@@ -31,16 +31,31 @@ sudo chmod +x instancecreation.sh
 # Run the script
 ./instancecreation.sh
 ```
+### Or Execute Below commands to create Cluster and Instance ###
+```bash
+gcloud beta alloydb clusters create $CLUSTER_NAME \
+    --password=$PASSWORD \
+    --network=$NETWORK \
+    --region=$REGION \
+    --project=$PROJECT_ID
+---
+gcloud beta alloydb instances create $RIMARY_INSTANCE_NAME \
+    --instance-type=PRIMARY \
+    --cpu-count=2 \
+    --region=$REGION  \
+    --cluster=$CLUSTER_NAME \
+    --project=$PROJECT_ID
+```
 ### SET ENV Variable ####
 ```bash
 export ALLOYDB_ADDRESS="YOUR_ALLOYDB_ADDRESS"  # Replace with the private IP address of the AlloyDB instance
 echo $ALLOYDB > alloydbip.txt
 ```
-### Task2, 3 and 4 ###
+### Connect to postgres client ###
 ``` bash
 psql -h $ALLOYDB -U postgres
 ```
-## Create the Tables ##
+### Task 2. Create tables in your instance ###
 ``` bash
 CREATE TABLE regions (
     region_id bigint NOT NULL,
@@ -69,15 +84,17 @@ ALTER TABLE departments ADD PRIMARY KEY (department_id);
 ```bash
 /dt
 ```
-## Load Data to Regions Table ##
+## Task 3. Load simple datasets into tables ##
 ``` bash
+### Load Data to Regions Table ###
+---
 INSERT INTO regions VALUES 
 (1, 'Europe'), 
 (2, 'Americas'), 
 (3, 'Asia'), 
 (4, 'Middle East and Africa');
-```
-
+---
+### Load Data to Regions Table ###
 
 
 
