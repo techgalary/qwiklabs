@@ -1,3 +1,10 @@
+##  Use Machine Learning APIs on Google Cloud: Challenge Lab| [GSP329](https://www.cloudskillsboost.google/focuses/12704?parent=catalog)
+
+
+## 🌐 **Guide to Complete the Challenge Lab:**
+
+ **Launch Cloud Shell:**  
+   Start your Google CloudShell session by [``clicking here``](https://console.cloud.google.com/home/dashboard?project=&pli=1&cloudshell=true).
 ### Export Environment Variables ###
 ```bash
 export LANGUAGE=<Update as per lab>
