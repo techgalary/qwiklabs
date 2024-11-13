@@ -1,17 +1,15 @@
 ### Export Environment Variables ###
-
+```bash
 export LANGUAGE=<Update as per lab>
 export LOCALE=<Update as per lab>
 export BIGQUERY_ROLE=<Update as per lab>
 export CLOUD_STORAGE_ROLE=<Update as per lab>
 export SERVICE_ACCOUNT=<provide some name here>
-
+```
 ### Task 1. Configure a service account to access the Machine Learning APIs, BigQuery, and Cloud Storage ###
 ``` bash
 
-
 gcloud iam service-accounts create $SERVICE_ACCOUNT
-
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$BIGQUERY_ROLE
 
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=$CLOUD_STORAGE_ROLE
