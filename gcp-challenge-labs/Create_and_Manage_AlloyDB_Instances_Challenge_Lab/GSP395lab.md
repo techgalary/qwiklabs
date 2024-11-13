@@ -2,7 +2,7 @@
 ## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [GSP395](https://www.cloudskillsboost.google/focuses/50123?parent=catalog)
 
 
-## 🌐 **Quick Start Guide:**
+## 🌐 **Quick Start Guide to Complete the Challenge Lab:**
 
  **Launch Cloud Shell:**  
    Start your Google CloudShell session by [``clicking here``](https://console.cloud.google.com/home/dashboard?project=&pli=1&cloudshell=true).
