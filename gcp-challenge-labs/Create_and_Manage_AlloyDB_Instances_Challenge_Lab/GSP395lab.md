@@ -38,7 +38,8 @@ gcloud beta alloydb clusters create $CLUSTER_NAME \
     --network=$NETWORK \
     --region=$REGION \
     --project=$PROJECT_ID
----
+```
+```bash
 gcloud beta alloydb instances create $RIMARY_INSTANCE_NAME \
     --instance-type=PRIMARY \
     --cpu-count=2 \
@@ -87,13 +88,13 @@ ALTER TABLE departments ADD PRIMARY KEY (department_id);
 ## Task 3. Load simple datasets into tables ##
 ``` bash
 ### Load Data to Regions Table ###
----
 INSERT INTO regions VALUES 
 (1, 'Europe'), 
 (2, 'Americas'), 
 (3, 'Asia'), 
 (4, 'Middle East and Africa');
----
+```
+```bash
 ### Load Data to Countries Table ###
 INSERT INTO countries VALUES 
 ('IT', 'Italy', 1), 
@@ -105,7 +106,8 @@ INSERT INTO countries VALUES
 ('AU', 'Australia', 3), 
 ('ZW', 'Zimbabwe', 4), 
 ('SG', 'Singapore', 3);
----
+```
+```bash
 ### Load data into the departments table ###
 INSERT INTO departments VALUES 
 (10, 'Administration', 200, 1700), 
@@ -120,10 +122,12 @@ INSERT INTO departments VALUES
 ```bash
 ### Check regions table ###
 SELECT * FROM regions;
----
+```
+```bash
 ### Check countries table ###
 SELECT * FROM countries;
----
+```
+```bash
 ### Check departments table ###
 SELECT * FROM departments;
 ```
