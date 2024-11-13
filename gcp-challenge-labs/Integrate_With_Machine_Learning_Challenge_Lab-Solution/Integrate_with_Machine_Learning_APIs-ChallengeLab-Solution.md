@@ -6,9 +6,9 @@ export BIGQUERY_ROLE=<Update as per lab>
 export CLOUD_STORAGE_ROLE=<Update as per lab>
 export SERVICE_ACCOUNT=<provide some name here>
 
-### Task 1 ###
+### Task 1. Configure a service account to access the Machine Learning APIs, BigQuery, and Cloud Storage ###
 ``` bash
-Task 1. Configure a service account to access the Machine Learning APIs, BigQuery, and Cloud Storage
+
 
 gcloud iam service-accounts create $SERVICE_ACCOUNT
 
@@ -19,19 +19,19 @@ gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAcco
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=roles/serviceusage.serviceUsageConsumer
 
 ```
-### Task 2 ###
+### Task 2. Create and download a credential file for your service account###
 
 ``` bash
-Task 2. Create and download a credential file for your service account
+
 
 gcloud iam service-accounts keys create $SERVICE_ACCOUNT-key.json --iam-account $SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com
 
 export GOOGLE_APPLICATION_CREDENTIALS=${PWD}/$SERVICE_ACCOUNT-key.json
 
 ```
-### Task 3 and 4 ####
+### Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API ####
 ```bash
-Task 3. Modify the Python script to extract text from image files & Task 4. Modify the Python script to translate the text using the Translation API
+
 
 gsutil cp gs://qwiklabs-gcp-01-5c7412d19782/analyze-images-v2.py . 
 NOTE:  [You can also run wget https://raw.githubusercontent.com/techgalary/qwiklabs/main/challenge-labs/Integrate_With_Machine_Learning_Challenge_Lab-Solution/analyze-images-v2.py] - This contains updated Python file
