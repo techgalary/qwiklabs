@@ -70,12 +70,12 @@ npm run build
 ```
 
 ### Task 6. Create a containerized version of the Frontend microservice ###
-
+```bash
 cd ~/monolith-to-microservices/microservices/src/frontend
 gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$FRONTEND_IDENTIFIER:1.0.0 .
-
+```
 ### Task 7. Deploy the Frontend microservice ###
-
+```bash
 kubectl create deployment $FRONTEND_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$FRONTEND_IDENTIFIER:1.0.0
-
 kubectl expose deployment $FRONTEND_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8080
+```
