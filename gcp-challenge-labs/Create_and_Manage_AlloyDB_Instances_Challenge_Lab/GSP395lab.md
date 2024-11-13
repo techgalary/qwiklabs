@@ -20,9 +20,24 @@ READPOOL_INSTANCE_NAME=""   # Replace with the Readpool instance name from the l
 BACKUP_ID="SAMPLE-BACKUP_ID"  # Replace with the Backup ID provided in the lab
 CPU_COUNT=2                 # Adjust the CPU count if necessary
 ```
-### Download and Execute the Script ###
+### Download and Execute the Script to Create Cluster and Instance-Task 1 ###
 ```bash
 # Download the script from the repository
+curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/instancecreation.sh
+
+# Make the script executable
+sudo chmod +x instancecreation.sh
+
+# Run the script
+./instancecreation.sh
+```
+### SET ENV Variable ####
+```bash
+export ALLOYDB_ADDRESS="YOUR_ALLOYDB_ADDRESS"  # Replace with the private IP address of the AlloyDB instance
+
+```
+### Download and Execute the Script to Complete Task2, 3 and 4 ###
+``` bash
 curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/managealloydb.sh
 
 # Make the script executable
