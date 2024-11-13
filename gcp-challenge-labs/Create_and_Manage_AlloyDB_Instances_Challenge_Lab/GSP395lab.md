@@ -34,18 +34,51 @@ sudo chmod +x instancecreation.sh
 ### SET ENV Variable ####
 ```bash
 export ALLOYDB_ADDRESS="YOUR_ALLOYDB_ADDRESS"  # Replace with the private IP address of the AlloyDB instance
-
+echo $ALLOYDB > alloydbip.txt
 ```
-### Download and Execute the Script to Complete Task2, 3 and 4 ###
+### Task2, 3 and 4 ###
 ``` bash
-curl -LO raw.githubusercontent.com/techgalary/qwiklabs/refs/heads/main/scripts/managealloydb.sh
-
-# Make the script executable
-sudo chmod +x managealloydb.sh
-
-# Run the script
-./managealloydb.sh
+psql -h $ALLOYDB -U postgres
 ```
+## Create the Tables ##
+``` bash
+CREATE TABLE regions (
+    region_id bigint NOT NULL,
+    region_name varchar(25)
+);
+ALTER TABLE regions ADD PRIMARY KEY (region_id);
+```
+```bash
+CREATE TABLE countries (
+    country_id char(2) NOT NULL,
+    country_name varchar(40),
+    region_id bigint
+);
+ALTER TABLE countries ADD PRIMARY KEY (country_id);
+```
+```bash
+CREATE TABLE departments (
+    department_id smallint NOT NULL,
+    department_name varchar(30),
+    manager_id integer,
+    location_id smallint
+);
+ALTER TABLE departments ADD PRIMARY KEY (department_id);
+```
+## Verifying Table Creation ##
+```bash
+/dt
+```
+## Load Data to Regions Table ##
+``` bash
+INSERT INTO regions VALUES 
+(1, 'Europe'), 
+(2, 'Americas'), 
+(3, 'Asia'), 
+(4, 'Middle East and Africa');
+```
+
+
 
 
 
