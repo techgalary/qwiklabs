@@ -19,7 +19,7 @@ gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAcco
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role=roles/serviceusage.serviceUsageConsumer
 
 ```
-### Task 2. Create and download a credential file for your service account###
+### Task 2. Create and download a credential file for your service account ###
 
 ``` bash
 
