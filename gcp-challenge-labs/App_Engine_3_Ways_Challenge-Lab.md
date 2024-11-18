@@ -1,4 +1,4 @@
-## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [ARC112](https://partner.cloudskillsboost.google/catalog_lab/6413)
+## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [ARC112](https://www.cloudskillsboost.google/catalog_lab/6413)
 
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
@@ -36,8 +36,15 @@ gcloud app browse   # Confirm the App deployment
 gcloud app browse   # Verify App Deployment
 ```
 ### Task 4- Deploy updates to your application ###
-```bash
-```
+
+#### Edit the Application Code ####
+1. Navigate to the directory containing the  app's code 
+2. Open the source code file
+
+For Python (main.py): Find the line that says "Hello, World!" and change it to "Hello, Cruel World!".
+fmt.Fprintln(w, "Hello, Cruel World!")
+For PHP (index.php): Locate the "Hello, World!" message and change it:
+
 
 
 
