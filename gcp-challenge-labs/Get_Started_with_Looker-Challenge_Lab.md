@@ -44,11 +44,16 @@ view: users_region {
   }
 
 ```
-Commit and Deploy the Changes to Production
+#### Commit and Deploy the Changes to Production ####
 
 ### Task 3. Create a new dashboard in Looker ###
+```
 1.Use your new view named users_region to create a bar chart of the top 3 event types based on the highest number of users.
-2.Customize your bar chart using any colors and labels of your choice.
-3.Save your bar chart to a new dashboard named User Events.
+ Navigate to Explore > Events > Select Event type
+ Navigate to Users Region > Click on Count
+2. Under Data update the rows to 3
+3. Under Visualization click on bar then click on run
+4. Under settings Click on Save > New Dashboard
+```
 
 
