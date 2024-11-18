@@ -38,12 +38,11 @@ view: users_region {
 ### Join the View to the Existing Events Explore ###
 #### Add a join statement to include the new users_region view in training_ecommerce.model file ####
 ```
-explore: events {
   join: users_region {
     relationship: one_to_one
     sql_on: ${events.user_id} = ${users_region.id} ;;
   }
-}
+
 ```
 Commit and Deploy the Changes to Production
 
