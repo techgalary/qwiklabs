@@ -3,9 +3,6 @@
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
- **Launch Cloud Shell:**  
-   Start your Google CloudShell session by [``clicking here``](https://console.cloud.google.com/home/dashboard?project=&pli=1&cloudshell=true).
-
 ### Task 1. Create a new report in Looker Studio ###
 
 * Create a new [Looker Studio](http://lookerstudio.google.com/) report named `Online Sales`
