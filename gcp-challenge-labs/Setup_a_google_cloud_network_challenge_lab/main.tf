@@ -1,4 +1,5 @@
 provider "google" {
+  project = "qwiklabs-gcp-01-deeeeaddc4ef"
   region = "us-central1"  # Replace the region as per the lab
 }
 
