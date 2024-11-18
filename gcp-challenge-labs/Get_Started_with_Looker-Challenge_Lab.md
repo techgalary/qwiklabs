@@ -1,4 +1,4 @@
-## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [ARC107](https://www.cloudskillsboost.google/course_templates/647/labs/461643)
+## 🚀Get Started with Looker: Challenge Lab | [ARC107](https://www.cloudskillsboost.google/focuses/61470?parent=catalog)
 
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
@@ -8,46 +8,52 @@
 
 ### Task 1. Create a new report in Looker Studio ###
 
-#### Guide to Creating a Report in Looker Studio ####
+* Create a new [Looker Studio](http://lookerstudio.google.com/) report named `Online Sales`
 
-1. Log in to Looker Studio
+### Create a new view named `users_region` and Paste the following:
 
-Visit Looker Studio and sign in using your Google account credentials.
+```
+view: users_region {
+sql_table_name: cloud-training-demos.looker_ecomm.users ;;
 
-2. Create a New Report
+dimension: id {
+primary_key: yes
+type: number
+sql: ${TABLE}.id ;;
+}
 
-Click on Create located in the top left corner of the dashboard.
+dimension: state {
+type: string
+sql: ${TABLE}.state ;;
+}
 
-Select Report from the dropdown menu.
+dimension: country {
+type: string
+sql: ${TABLE}.country ;;
+}
 
-3. Connect to the Data Source
+measure: count {
+type: count
+drill_fields: [id, state, country]
+}
+}
+```
 
-In the Add data to report panel, click on Add data.
+### Join the View to the Existing Explore ###
+#### Add a join statement to include the new users_region view ####
+```
+explore: events {
+  join: users_region {
+    relationship: one_to_one
+    sql_on: ${events.user_id} = ${users_region.id} ;;
+  }
+}
+```
 
-Navigate to the Public datasets section.
+### Task 3. Create a new dashboard in Looker ###
 
-Search for and choose the dataset qwiklabs-gcp-03-7dae01b19a1a > thelook_ecommerce > orders.
+* Create a bar chart of the `top 3 event types based on the highest number of users`
 
-Click Add and then confirm by selecting Add to report to connect the data source.
+* Save your bar chart to a new dashboard named `User Events`
 
-4. Add a Time Series Chart
 
-In the report editor, click on Add a chart from the toolbar.
-
-Choose Time series chart from the chart options.
-
-Click on the report canvas to place the chart.
-
-Ensure that the appropriate Dimension (e.g., Order Date) and Metric (e.g., Total Sales or Order Value) are correctly configured.
-
-5. Customize the Chart
-
-Apply any desired theme from the Theme and Layout section to style the chart.
-
-Double-click the chart title and modify it to a custom title such as Online Sales Over Time.
-
-6. Save the Report
-
-Rename the report by clicking on the report title at the top and entering Online Sales.
-
-Save your changes to ensure the report is stored properly.
