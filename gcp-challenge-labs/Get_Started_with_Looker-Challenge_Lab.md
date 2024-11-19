@@ -8,6 +8,8 @@
 * Create a new report named `Online Sales` [Looker Studio](http://lookerstudio.google.com/)
 
 ### Task 2. Create a new view in Looker ####
+#### Paste the below code under users_region like below
+<img width="488" alt="image" src="https://github.com/user-attachments/assets/69662b13-c9ac-4f61-b52c-ad811681a05b">
 
 ```
 view: users_region {
@@ -37,6 +39,8 @@ view: users_region {
 ```
 ### Join the View to the Existing Events Explore ###
 #### Add a join statement to include the new users_region view in training_ecommerce.model file ####
+Like below <img width="451" alt="image" src="https://github.com/user-attachments/assets/82683538-45ac-45b3-bfee-bcc25933a16a">
+
 ```
   join: users_region {
     relationship: one_to_one
