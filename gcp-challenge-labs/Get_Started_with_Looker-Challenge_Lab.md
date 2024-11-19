@@ -41,7 +41,6 @@ view: users_region {
 
 ### Join the View to the Existing Events Explore ###
 #### Add a join statement to include the new users_region view in training_ecommerce.model file ####
-Like below <img width="451" alt="image" src="https://github.com/user-attachments/assets/82683538-45ac-45b3-bfee-bcc25933a16a">
 
 ```
   join: users_region {
@@ -50,6 +49,8 @@ Like below <img width="451" alt="image" src="https://github.com/user-attachments
   }
 
 ```
+Like below 
+<img width="451" alt="image" src="https://github.com/user-attachments/assets/82683538-45ac-45b3-bfee-bcc25933a16a">
 #### Commit and Deploy the Changes to Production ####
 
 ### Task 3. Create a new dashboard in Looker ###
