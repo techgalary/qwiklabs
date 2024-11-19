@@ -49,8 +49,9 @@ view: users_region {
   }
 
 ```
-Like below 
+#### After update it should look like below ####
 <img width="451" alt="image" src="https://github.com/user-attachments/assets/82683538-45ac-45b3-bfee-bcc25933a16a">
+
 #### Commit and Deploy the Changes to Production ####
 
 ### Task 3. Create a new dashboard in Looker ###
