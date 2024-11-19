@@ -65,4 +65,6 @@ view: users_region {
 ```
 <img width="458" alt="image" src="https://github.com/user-attachments/assets/ae439325-9f82-44c4-ac6c-394902f78c45">
 
+### Solution Video link: https://youtu.be/aCXLPkSE3wk ####
+
 
