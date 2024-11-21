@@ -22,14 +22,15 @@ gcloud bigtable tables create SessionHistory \
 ```
 ##### Step 2 Create a Dataflow Job to Load Data #####
 ```
-gcloud dataflow jobs run import-recommendations \
+gcloud dataflow jobs run import-sessions \
   --gcs-location gs://dataflow-templates/latest/SequenceFile-to-Cloud-Bigtable \
   --region us-west1 \
   --parameters \
-inputFile=gs://cloud-training/OCBL377/retail-recommendations-00000-of-00001,\
+inputFile=gs://cloud-training/OCBL377/retail-engagements-sales-00000-of-00001,\
 bigtableInstanceId=ecommerce-recommendations,\
-bigtableTableId=PersonalizedProducts,\
+bigtableTableId=SessionHistory,\
 bigtableProjectId=$(gcloud config get-value project)
+
 ```
 #### Part 2 Create and Populate the PersonalizedProducts Table ####
 
