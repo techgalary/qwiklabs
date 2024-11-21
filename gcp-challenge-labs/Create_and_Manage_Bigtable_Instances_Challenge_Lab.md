@@ -1,4 +1,4 @@
-# Create and Manage Bigtable Instances: Challenge Lab || [GSP380](https://www.cloudskillsboost.google/focuses/92500?parent=catalog) ||
+# Create and Manage Bigtable Instances: Challenge Lab || [GSP380](https://www.cloudskillsboost.google/focuses/92500?parent=catalog) 
 
 ### Task 1. Create a new Bigtable instance ###
 ```
