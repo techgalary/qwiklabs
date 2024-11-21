@@ -22,13 +22,13 @@ gcloud bigtable tables create SessionHistory \
 ```
 ##### Step 2 Create a Dataflow Job to Load Data #####
 ```
-gcloud dataflow jobs run import-sessions \
-  --gcs-location=gs://dataflow-templates/latest/Cloud_Bigtable_Import \
-  --region=us-west1 \
-  --parameters=\
-inputFilePattern=gs://cloud-training/OCBL377/retail-engagements-sales-00000-of-00001,\
+gcloud dataflow jobs run import-recommendations \
+  --gcs-location gs://dataflow-templates/latest/SequenceFile-to-Cloud-Bigtable \
+  --region us-west1 \
+  --parameters \
+inputFile=gs://cloud-training/OCBL377/retail-recommendations-00000-of-00001,\
 bigtableInstanceId=ecommerce-recommendations,\
-bigtableTableId=SessionHistory,\
+bigtableTableId=PersonalizedProducts,\
 bigtableProjectId=$(gcloud config get-value project)
 ```
 #### Part 2 Create and Populate the PersonalizedProducts Table ####
@@ -43,13 +43,14 @@ gcloud bigtable tables create PersonalizedProducts \
 ##### Step 2 Create a Dataflow Job to Load Data #####
 ```
 gcloud dataflow jobs run import-recommendations \
-  --gcs-location=gs://dataflow-templates/latest/Cloud_Bigtable_Import \
-  --region=us-west1 \
-  --parameters=\
-inputFilePattern=gs://cloud-training/OCBL377/retail-recommendations-00000-of-00001,\
+  --gcs-location gs://dataflow-templates/latest/SequenceFile-to-Cloud-Bigtable \
+  --region us-west1 \
+  --parameters \
+inputFile=gs://cloud-training/OCBL377/retail-recommendations-00000-of-00001,\
 bigtableInstanceId=ecommerce-recommendations,\
 bigtableTableId=PersonalizedProducts,\
 bigtableProjectId=$(gcloud config get-value project)
+
 ```
 ### Task 3 Configure replication in Bigtable ###
 ```
