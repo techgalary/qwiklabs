@@ -5,8 +5,8 @@
 
 ### Set Environment Variables ###
 ```
-export REGION=us-east4
-export BUCKET_NAME=PROJECT_ID
+export REGION=us-east1
+export BUCKET_NAME=qwiklabs-gcp-01-026491e087be
 ```
 ### Task 1. Create a Cloud Spanner instance ###
 ```
