@@ -176,7 +176,7 @@ gsutil cp manifest.json gs://$BUCKET_NAME
 gcloud dataflow jobs run spanner-import-job \
     --gcs-location=gs://dataflow-templates/latest/GCS_Text_to_Cloud_Spanner \
     --region=$REGION\
-    --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-instance",importManifest="gs://qwiklabs-gcp-01-026491e087be/manifest.json"
+    --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-db",importManifest="gs://qwiklabs-gcp-01-026491e087be/manifest.json"
 ```
 
 ### Task 6. Add a new column to an existing table ###
