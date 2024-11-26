@@ -144,7 +144,7 @@ gcloud spanner databases ddl update banking-ops-db \
 --ddl="ALTER TABLE Category ADD COLUMN MarketingBudget INT64;"
 
 ```
-##### verify the data #####
+#### Verify the data ####
 ```
 gcloud spanner databases ddl describe banking-ops-db --instance=banking-ops-instance
 ```
