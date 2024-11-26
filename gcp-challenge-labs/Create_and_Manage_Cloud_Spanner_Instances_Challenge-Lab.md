@@ -3,10 +3,14 @@
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
+### Set Environment Variables ###
+```
+export REGION=us-east4
+export BUCKET_NAME=PROJECT_ID
 ### Task 1. Create a Cloud Spanner instance ###
 ```
 gcloud spanner instances create banking-ops-instance \
-    --config=regional-us-east4 \
+    --config=regional-$REGION \
     --description="Banking Operations Instance" \
     --nodes=1
 ```
@@ -77,7 +81,7 @@ gcloud spanner databases ddl describe banking-ops-db \
 ```
  vi portfolio.sql
 ```
-##### paste below snippet in this file #####
+##### Paste below snippet in this file #####
 ```
 INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
   (1, "Banking", "Bnkg", "All Banking Business"),
@@ -88,7 +92,7 @@ INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
 ``` 
 vi category.sql
  ```
-##### paste below snippet in this file #####
+##### Paste below snippet in this file #####
 ```
 INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALUES
   (1, 1, "Cash", NULL),
@@ -100,7 +104,7 @@ INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALU
 ```
 vi product.sql
  ```
-##### paste below snippet in this file #####
+##### Paste below snippet in this file #####
 ```
 INSERT INTO Product (ProductId, CategoryId, PortfolioId, ProductName, ProductAssetCode, ProductClass) VALUES
   (1, 1, 1, "Checking Account", "ChkAcct", "Banking LOB"),
@@ -135,20 +139,38 @@ gcloud spanner databases execute-sql banking-ops-db \
 ```
 gsutil cp gs://cloud-training/OCBL375/Customer_List_500.csv .
 ```
-#### Convert CSV to SQL Insert Statement using script ####
-``` 
-vi customer_inserts.sql 
+#### Enable APIs ####
 ```
+gcloud services enable dataflow.googleapis.com
+gcloud services enable spanner.googleapis.com
 ```
-import csv
+#### Create manifest.json file ####
+```
+cat > manifest.json << EOF_CP
+{
+  "tables": [
+    {
+      "table_name": "Customer",
+      "file_patterns": [
+        "gs://cloud-training/OCBL375/Customer_List_500.csv"
+      ],
+      "columns": [
+        {"column_name" : "CustomerId", "type_name" : "STRING" },
+        {"column_name" : "Name", "type_name" : "STRING" },
+        {"column_name" : "Location", "type_name" : "STRING" }
+      ]
+    }
+  ]
+}
+EOF_CP
+```
+##### Create S3 bucket 
+```
+gcloud storage buckets create gs://$BUCKET_NAME --location=$REGION
+gsutil cp manifest.json gs://$BUCKET_NAME
 
-with open("Customer_List_500.csv", "r") as csvfile, open("customer_inserts.sql", "w") as sqlfile:
-    reader = csv.reader(csvfile)
-    for row in reader:
-        sqlfile.write(
-            f"INSERT INTO Customer (CustomerId, Name, Location) VALUES ('{row[0]}', '{row[1]}', '{row[2]}');\n"
-        )
 ```
+
 ##### Verify the data #####
 ```
 SELECT COUNT(*) FROM Customer;
