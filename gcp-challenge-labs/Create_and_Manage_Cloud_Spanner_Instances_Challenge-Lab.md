@@ -18,7 +18,8 @@ gcloud spanner databases create banking-ops-db \
 
 ### Task 3. Create tables in your database ###
 #### DDL Statements for Table Creation ####
-
+``` vi table.sql ```
+#### paste below ddl statement here ####
 ```
 -- Create Portfolio Table
 CREATE TABLE Portfolio (
@@ -52,7 +53,73 @@ CREATE TABLE Customer (
   Name STRING(MAX) NOT NULL,
   Location STRING(MAX) NOT NULL
 ) PRIMARY KEY (CustomerId);
+```
+#### Execute the table.sql file using command ####
+```
+gcloud spanner databases ddl update banking-ops-db \
+    --instance=banking-ops-instance \
+    --ddl="$(cat schema.sql)"
+```
+#### Verify the tables ####
+```
+gcloud spanner databases ddl describe banking-ops-db \
+    --instance=banking-ops-instance
+```
+### Task 4. Load simple datasets into tables ###
+
+#### DML Commands for Loading Data ####
+##### Load Data into the Portfolio Table #####
+``` vi portfolio.sql ```
+##### paste below snippet in this file #####
+```
+INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
+  (1, "Banking", "Bnkg", "All Banking Business"),
+  (2, "Asset Growth", "AsstGrwth", "All Asset Focused Products"),
+  (3, "Insurance", "Insurance", "All Insurance Focused Products");
+```
+##### Load Data into the Category Table #####
+``` vi category.sql ```
+##### paste below snippet in this file #####
+```
+INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALUES
+  (1, 1, "Cash", NULL),
+  (2, 2, "Investments - Short Return", NULL),
+  (3, 2, "Annuities", NULL),
+  (4, 3, "Life Insurance", NULL);
+```
+##### Load Data into the Product Table #####
+``` vi product.sql ```
+##### paste below snippet in this file #####
+```
+INSERT INTO Product (ProductId, CategoryId, PortfolioId, ProductName, ProductAssetCode, ProductClass) VALUES
+  (1, 1, 1, "Checking Account", "ChkAcct", "Banking LOB"),
+  (2, 2, 2, "Mutual Fund Consumer Goods", "MFundCG", "Investment LOB"),
+  (3, 3, 2, "Annuity Early Retirement", "AnnuFixed", "Investment LOB"),
+  (4, 4, 3, "Term Life Insurance", "TermLife", "Insurance LOB"),
+  (5, 1, 1, "Savings Account", "SavAcct", "Banking LOB"),
+  (6, 1, 1, "Personal Loan", "PersLn", "Banking LOB"),
+  (7, 1, 1, "Auto Loan", "AutLn", "Banking LOB"),
+  (8, 4, 3, "Permanent Life Insurance", "PermLife", "Insurance LOB"),
+  (9, 2, 2, "US Savings Bonds", "USSavBond", "Investment LOB");
+```
+##### Execute all files now #####
+```
+gcloud spanner databases execute-sql banking-ops-db \
+    --instance=banking-ops-instance \
+    --sql="$(cat portfolio.sql)"
+```
+```
+gcloud spanner databases execute-sql banking-ops-db \
+    --instance=banking-ops-instance \
+    --sql="$(cat category.sql)"
 
 ```
-
-### ###
+```
+gcloud spanner databases execute-sql banking-ops-db \
+    --instance=banking-ops-instance \
+    --sql="$(cat product.sql)"
+```
+##### Verify the loaded table #####
+``` SELECT * FROM Portfolio; ```
+``` SELECT * FROM Category; ```
+``` SELECT * FROM Product; ```
