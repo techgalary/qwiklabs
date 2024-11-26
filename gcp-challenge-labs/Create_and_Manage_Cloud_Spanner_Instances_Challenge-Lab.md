@@ -4,8 +4,9 @@
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
 ### Set Environment Variables ###
+#### NOTE: UPDATE THE REGION AND BUCKET_NAME as per your lab#####
 ```
-export REGION=us-east1
+export REGION=us-east1  
 export BUCKET_NAME=qwiklabs-gcp-01-026491e087be
 ```
 ### Task 1. Create a Cloud Spanner instance ###
@@ -23,12 +24,10 @@ gcloud spanner databases create banking-ops-db \
 
 ### Task 3. Create tables in your database ###
 #### DDL Statements for Table Creation ####
-``` 
-vi table.sql
-```
+
 #### paste below ddl statement here ####
 ```
--- Create Portfolio Table
+
 CREATE TABLE Portfolio (
   PortfolioId INT64 NOT NULL,
   Name STRING(MAX),
@@ -36,7 +35,6 @@ CREATE TABLE Portfolio (
   PortfolioInfo STRING(MAX)
 ) PRIMARY KEY (PortfolioId);
 
--- Create Category Table
 CREATE TABLE Category (
   CategoryId INT64 NOT NULL,
   PortfolioId INT64 NOT NULL,
@@ -44,7 +42,6 @@ CREATE TABLE Category (
   PortfolioInfo STRING(MAX)
 ) PRIMARY KEY (CategoryId);
 
--- Create Product Table
 CREATE TABLE Product (
   ProductId INT64 NOT NULL,
   CategoryId INT64 NOT NULL,
@@ -54,35 +51,18 @@ CREATE TABLE Product (
   ProductClass STRING(25)
 ) PRIMARY KEY (ProductId);
 
--- Create Customer Table
 CREATE TABLE Customer (
   CustomerId STRING(36) NOT NULL,
   Name STRING(MAX) NOT NULL,
   Location STRING(MAX) NOT NULL
 ) PRIMARY KEY (CustomerId);
 ```
-```
-chmod u+x table.sql
-```
-#### Execute the table.sql file using command ####
-```
-gcloud spanner databases ddl update banking-ops-db \
-    --instance=banking-ops-instance \
-    --ddl="$(cat table.sql)"
-```
-#### Verify the tables ####
-```
-gcloud spanner databases ddl describe banking-ops-db \
-    --instance=banking-ops-instance
-```
 ### Task 4. Load simple datasets into tables ###
 
 #### DML Commands for Loading Data ####
 ##### Load Data into the Portfolio Table #####
-```
- vi portfolio.sql
-```
-##### Paste below snippet in this file #####
+
+##### Paste below snippet  #####
 ```
 INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
   (1, "Banking", "Bnkg", "All Banking Business"),
@@ -90,10 +70,7 @@ INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
   (3, "Insurance", "Insurance", "All Insurance Focused Products");
 ```
 ##### Load Data into the Category Table #####
-``` 
-vi category.sql
- ```
-##### Paste below snippet in this file #####
+##### Paste below snippet #####
 ```
 INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALUES
   (1, 1, "Cash", NULL),
@@ -102,10 +79,7 @@ INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALU
   (4, 3, "Life Insurance", NULL);
 ```
 ##### Load Data into the Product Table #####
-```
-vi product.sql
- ```
-##### Paste below snippet in this file #####
+##### Paste below snippet #####
 ```
 INSERT INTO Product (ProductId, CategoryId, PortfolioId, ProductName, ProductAssetCode, ProductClass) VALUES
   (1, 1, 1, "Checking Account", "ChkAcct", "Banking LOB"),
@@ -118,23 +92,7 @@ INSERT INTO Product (ProductId, CategoryId, PortfolioId, ProductName, ProductAss
   (8, 4, 3, "Permanent Life Insurance", "PermLife", "Insurance LOB"),
   (9, 2, 2, "US Savings Bonds", "USSavBond", "Investment LOB");
 ```
-##### Execute all files now #####
-```
-gcloud spanner databases execute-sql banking-ops-db \
-    --instance=banking-ops-instance \
-    --sql="$(cat portfolio.sql)"
-```
-```
-gcloud spanner databases execute-sql banking-ops-db \
-    --instance=banking-ops-instance \
-    --sql="$(cat category.sql)"
 
-```
-```
-gcloud spanner databases execute-sql banking-ops-db \
-    --instance=banking-ops-instance \
-    --sql="$(cat product.sql)"
-```
 ### Task 5. Load a complex dataset ###
 #### Download the csv file ####
 ```
@@ -176,7 +134,7 @@ gsutil cp manifest.json gs://$BUCKET_NAME
 gcloud dataflow jobs run spanner-import-job \
     --gcs-location=gs://dataflow-templates/latest/GCS_Text_to_Cloud_Spanner \
     --region=$REGION\
-    --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-db",importManifest="gs://qwiklabs-gcp-01-026491e087be/manifest.json"
+    --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-db",importManifest="gs://$BUCKET_NAME/manifest.json"
 ```
 
 ### Task 6. Add a new column to an existing table ###
