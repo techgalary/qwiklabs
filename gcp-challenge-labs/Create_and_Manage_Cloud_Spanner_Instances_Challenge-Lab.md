@@ -138,7 +138,7 @@ SELECT * FROM Portfolio;
 SELECT * FROM Category;
 ```
 ```
- SELECT * FROM Product;
+SELECT * FROM Product;
 ```
 
 ### Task 5. Load a complex dataset ###
