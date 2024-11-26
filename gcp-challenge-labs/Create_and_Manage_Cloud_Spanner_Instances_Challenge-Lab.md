@@ -56,11 +56,14 @@ CREATE TABLE Customer (
   Location STRING(MAX) NOT NULL
 ) PRIMARY KEY (CustomerId);
 ```
+```
+chmod u+x table.sql
+```
 #### Execute the table.sql file using command ####
 ```
 gcloud spanner databases ddl update banking-ops-db \
     --instance=banking-ops-instance \
-    --ddl="$(cat schema.sql)"
+    --ddl="$(cat table.sql)"
 ```
 #### Verify the tables ####
 ```
