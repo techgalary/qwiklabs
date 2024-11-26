@@ -130,17 +130,6 @@ gcloud spanner databases execute-sql banking-ops-db \
     --instance=banking-ops-instance \
     --sql="$(cat product.sql)"
 ```
-##### Verify the loaded table #####
-```
-SELECT * FROM Portfolio;
-```
-```
-SELECT * FROM Category;
-```
-```
-SELECT * FROM Product;
-```
-
 ### Task 5. Load a complex dataset ###
 #### Download the csv file ####
 ```
@@ -148,7 +137,7 @@ gsutil cp gs://cloud-training/OCBL375/Customer_List_500.csv .
 ```
 #### Convert CSV to SQL Insert Statement using script ####
 ``` 
-vi customer_inserts.sql ```
+vi customer_inserts.sql 
 ```
 import csv
 
