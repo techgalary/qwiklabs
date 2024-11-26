@@ -25,7 +25,7 @@ gcloud spanner databases create banking-ops-db \
 ### Task 3. Create tables in your database ###
 #### DDL Statements for Table Creation ####
 
-#### paste below ddl statement here ####
+#### paste below ddl statement in Query and run ####
 ```
 
 CREATE TABLE Portfolio (
