@@ -7,6 +7,7 @@
 ```
 export REGION=us-east4
 export BUCKET_NAME=PROJECT_ID
+```
 ### Task 1. Create a Cloud Spanner instance ###
 ```
 gcloud spanner instances create banking-ops-instance \
@@ -164,11 +165,18 @@ cat > manifest.json << EOF_CP
 }
 EOF_CP
 ```
-##### Create S3 bucket 
+##### Create S3 bucket #####
 ```
 gcloud storage buckets create gs://$BUCKET_NAME --location=$REGION
 gsutil cp manifest.json gs://$BUCKET_NAME
 
+```
+#### Run datafow job ####
+```
+gcloud dataflow jobs run spanner-import-job \
+    --gcs-location=gs://dataflow-templates/latest/GCS_Text_to_Cloud_Spanner \
+    --region=us-east4 \
+    --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-instance",importManifest="gs://qwiklabs-gcp-03-7f7bafb2a528/manifest.json"
 ```
 
 ##### Verify the data #####
