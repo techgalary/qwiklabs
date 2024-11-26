@@ -4,7 +4,7 @@
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
 ### Set Environment Variables ###
-#### NOTE: UPDATE THE REGION AND BUCKET_NAME as per your lab#####
+#### NOTE: UPDATE THE REGION AND BUCKET_NAME as per your lab #####
 ```
 export REGION=us-east1  
 export BUCKET_NAME=qwiklabs-gcp-01-026491e087be
