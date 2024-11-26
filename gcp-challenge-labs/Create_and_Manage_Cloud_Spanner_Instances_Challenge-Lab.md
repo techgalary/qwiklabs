@@ -175,7 +175,7 @@ gsutil cp manifest.json gs://$BUCKET_NAME
 ```
 gcloud dataflow jobs run spanner-import-job \
     --gcs-location=gs://dataflow-templates/latest/GCS_Text_to_Cloud_Spanner \
-    --region=us-east4 \
+    --region=$REGION\
     --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-instance",importManifest="gs://qwiklabs-gcp-03-7f7bafb2a528/manifest.json"
 ```
 
