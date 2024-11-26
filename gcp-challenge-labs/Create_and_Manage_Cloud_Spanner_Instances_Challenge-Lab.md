@@ -179,12 +179,6 @@ gcloud dataflow jobs run spanner-import-job \
     --parameters=instanceId="banking-ops-instance",databaseId="banking-ops-instance",importManifest="gs://qwiklabs-gcp-03-7f7bafb2a528/manifest.json"
 ```
 
-##### Verify the data #####
-```
-SELECT COUNT(*) FROM Customer;
-
-```
-
 ### Task 6. Add a new column to an existing table ###
 ```
 gcloud spanner databases ddl update banking-ops-db \
