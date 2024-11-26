@@ -18,7 +18,9 @@ gcloud spanner databases create banking-ops-db \
 
 ### Task 3. Create tables in your database ###
 #### DDL Statements for Table Creation ####
-``` vi table.sql ```
+``` 
+vi table.sql
+```
 #### paste below ddl statement here ####
 ```
 -- Create Portfolio Table
@@ -69,7 +71,9 @@ gcloud spanner databases ddl describe banking-ops-db \
 
 #### DML Commands for Loading Data ####
 ##### Load Data into the Portfolio Table #####
-``` vi portfolio.sql ```
+```
+ vi portfolio.sql
+```
 ##### paste below snippet in this file #####
 ```
 INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
@@ -78,7 +82,9 @@ INSERT INTO Portfolio (PortfolioId, Name, ShortName, PortfolioInfo) VALUES
   (3, "Insurance", "Insurance", "All Insurance Focused Products");
 ```
 ##### Load Data into the Category Table #####
-``` vi category.sql ```
+``` 
+vi category.sql
+ ```
 ##### paste below snippet in this file #####
 ```
 INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALUES
@@ -88,7 +94,9 @@ INSERT INTO Category (CategoryId, PortfolioId, CategoryName, PortfolioInfo) VALU
   (4, 3, "Life Insurance", NULL);
 ```
 ##### Load Data into the Product Table #####
-``` vi product.sql ```
+```
+vi product.sql
+ ```
 ##### paste below snippet in this file #####
 ```
 INSERT INTO Product (ProductId, CategoryId, PortfolioId, ProductName, ProductAssetCode, ProductClass) VALUES
@@ -120,9 +128,12 @@ gcloud spanner databases execute-sql banking-ops-db \
     --sql="$(cat product.sql)"
 ```
 ##### Verify the loaded table #####
-``` SELECT * FROM Portfolio; ```
-``` SELECT * FROM Category; ```
-``` SELECT * FROM Product; ```
+``` SELECT * FROM Portfolio;
+```
+``` SELECT * FROM Category;
+```
+``` SELECT * FROM Product;
+```
 
 ### Task 5. Load a complex dataset ###
 #### Download the csv file ####
@@ -142,7 +153,8 @@ with open("Customer_List_500.csv", "r") as csvfile, open("customer_inserts.sql",
         )
 ```
 ##### Verify the data #####
-``` SELECT COUNT(*) FROM Customer; ```
+``` SELECT COUNT(*) FROM Customer;
+```
 
 ### Task 6. Add a new column to an existing table ###
 ```
