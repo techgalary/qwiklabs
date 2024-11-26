@@ -139,6 +139,7 @@ gsutil cp gs://cloud-training/OCBL375/Customer_List_500.csv .
 ``` 
 vi customer_inserts.sql 
 ```
+```
 import csv
 
 with open("Customer_List_500.csv", "r") as csvfile, open("customer_inserts.sql", "w") as sqlfile:
@@ -151,6 +152,7 @@ with open("Customer_List_500.csv", "r") as csvfile, open("customer_inserts.sql",
 ##### Verify the data #####
 ```
 SELECT COUNT(*) FROM Customer;
+
 ```
 
 ### Task 6. Add a new column to an existing table ###
