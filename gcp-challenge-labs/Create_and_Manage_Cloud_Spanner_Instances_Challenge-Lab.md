@@ -131,11 +131,14 @@ gcloud spanner databases execute-sql banking-ops-db \
     --sql="$(cat product.sql)"
 ```
 ##### Verify the loaded table #####
-``` SELECT * FROM Portfolio;
 ```
-``` SELECT * FROM Category;
+SELECT * FROM Portfolio;
 ```
-``` SELECT * FROM Product;
+```
+SELECT * FROM Category;
+```
+```
+ SELECT * FROM Product;
 ```
 
 ### Task 5. Load a complex dataset ###
@@ -144,7 +147,8 @@ gcloud spanner databases execute-sql banking-ops-db \
 gsutil cp gs://cloud-training/OCBL375/Customer_List_500.csv .
 ```
 #### Convert CSV to SQL Insert Statement using script ####
-``` vi customer_inserts.sql ```
+``` 
+vi customer_inserts.sql ```
 ```
 import csv
 
@@ -156,7 +160,8 @@ with open("Customer_List_500.csv", "r") as csvfile, open("customer_inserts.sql",
         )
 ```
 ##### Verify the data #####
-``` SELECT COUNT(*) FROM Customer;
+```
+SELECT COUNT(*) FROM Customer;
 ```
 
 ### Task 6. Add a new column to an existing table ###
