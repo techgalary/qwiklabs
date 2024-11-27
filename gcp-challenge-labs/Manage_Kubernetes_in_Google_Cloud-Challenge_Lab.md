@@ -8,6 +8,7 @@ export ZONE=us-central1-a
 export NAMESPACE=gmp-3hp4
 export INTERVAL=45s
 export SERVICE_NAME=helloweb-service-9kyw
+export PROJECT_ID=qwiklabs-gcp-04-aeed7da94d2c
 ```
 ### Task 1. Create a GKE cluster ###
 
@@ -22,8 +23,8 @@ gcloud services enable container.googleapis.com
 ```
 #### Execute below command to create Cluster ####
 ```
-gcloud container clusters create hello-world-5f3o \
-    --zone us-central1-a \
+gcloud container clusters create $CLUSTER_NAME \
+    --zone $ZONE \
     --release-channel regular \
     --cluster-version 1.27.8 \
     --enable-autoscaling \
@@ -33,20 +34,20 @@ gcloud container clusters create hello-world-5f3o \
 ```
 #### Execute below command to verify the cluster ####
 ```
-gcloud container clusters describe hello-world-4jzt --zone us-west1-a
+gcloud container clusters describe $CLUSTER_NAME --zone $ZONE
 ```
 
 ### Task 2. Enable Managed Prometheus on the GKE cluster ###
 
 #### Enable the service for prometheus ####
 ```
-gcloud container clusters update hello-world-4jzt \
-    --zone us-west1-a \
+gcloud container clusters update $CLUSTER_NAME \
+    --zone $ZONE \
     --enable-managed-prometheus
 ```
 #### Create the Namespace ####
 ```
-kubectl create namespace gmp-awp5
+kubectl create namespace $NAMESPACE
 ```
 ### Deploy the Sample Prometheus App ###
 #### Download the manifest file ####
@@ -65,12 +66,12 @@ containers:
 ```
 #### Deploy the application on the gmp-awp5 namespace ####
 ```
-kubectl apply -f prometheus-app.yaml --namespace=gmp-awp5
+kubectl apply -f prometheus-app.yaml --namespace=$NAMESPACE
 
 ```
 #### Verify the deployment ####
 ```
-kubectl get pods --namespace=gmp-awp5
+kubectl get pods --namespace=$NAMESPACE
 
 ```
 #### Apply Pod Monitoring ####
@@ -94,11 +95,11 @@ spec:
 ```
 #### Apply the pod monitoring resource ####
 ```
-kubectl apply -f pod-monitoring.yaml --namespace=gmp-awp5
+kubectl apply -f pod-monitoring.yaml --namespace=$NAMESPACE
 ```
 #### Verify the pod monitoring ####
 ```
-kubectl get podmonitoring --namespace=gmp-awp5
+kubectl get podmonitoring --namespace=$NAMESPACE
 ```
 ### Task 3. Deploy an application onto the GKE cluster ###
 
@@ -110,16 +111,16 @@ gsutil cp -r gs://spls/gsp510/hello-app/ .
 #### Deploy the Application ####
 ```
 cd hello-app/manifests
-kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+kubectl apply -f helloweb-deployment.yaml --namespace=$NAMESPACE
 ```
 #### Verify the deployment ####
 ```
-kubectl get deployments --namespace=gmp-awp5
+kubectl get deployments --namespace=$NAMESPACE
 
 ```
 #### Inspect the Error ####
 ```
-kubectl describe deployment helloweb --namespace=gmp-awp5
+kubectl describe deployment helloweb --namespace=$NAMESPACE
 ```
 #### Create Logs-Based Metric ####
 ##### Enable logging for the GKE cluster #####
@@ -153,11 +154,11 @@ image: gcr.io/google-samples/hello-app:1.0
 ```
  ###### Apply the manifest ######
  ```
-kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+kubectl apply -f helloweb-deployment.yaml --namespace=$NAMESPACE
 ```
 ###### Check application status ######
 ```
-kubectl get services --namespace=gmp-awp5
+kubectl get services --namespace=$NAMESPACE
 ```
 
 ##### Test the Alert Policy again #####
@@ -254,35 +255,35 @@ image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
 ##### Save and close the file #####
 
 #### Delete the Existing Deployment ####
-##### Delete the helloweb deployment from the gmp-awp5 namespace #####
+##### Delete the helloweb deployment from the gmp-3hp4 namespace #####
 ```
-kubectl delete deployment helloweb --namespace=gmp-awp5
+kubectl delete deployment helloweb --namespace=$NAMESPACE
 ```
 ##### Confirm the deployment has been deleted #####
 ```
-kubectl get deployments --namespace=gmp-awp5
+kubectl get deployments --namespace=$NAMESPACE
 ```
 
 #### Deploy the Updated Manifest ####
 ##### Apply the updated helloweb-deployment.yaml manifest #####
 ```
-kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+kubectl apply -f helloweb-deployment.yaml --namespace=$NAMESPACE
 ```
 ##### Verify the deployment #####
 ```
-kubectl get deployments --namespace=gmp-awp5
+kubectl get deployments --namespace=$NAMESPACE
 ```
 
 #### Verify the Deployment ####
 
 ##### Check the status of the pods to ensure they are running ##### 
 ```
-kubectl get pods --namespace=gmp-awp5
+kubectl get pods --namespace=$NAMESPACE
 ```
 ##### Verify the deployment in the Google Cloud Console ##### 
 #####  
     1.Navigate to Kubernetes Engine > Workloads.
-    2. Ensure that the helloweb deployment is listed under the gmp-awp5 namespace with no errors 
+    2.Ensure that the helloweb deployment is listed under the gmp-3hp4 namespace with no errors 
 ##### 
 
 ### Task 6. Containerize your code and deploy it onto the cluster ###
@@ -307,12 +308,12 @@ gcloud auth configure-docker
 ```
 ##### Build the Docker image using the Dockerfile #####
 ```
-docker build -t us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2 .
+docker build -t us-west1-docker.pkg.dev/qwiklabs-gcp-04-aeed7da94d2c/sandbox-repo/hello-app:v2 .
 ```
 #### Push the Image to Artifact Registry ####
 ##### Push the image to your repository #####
 ```
-docker push us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2
+docker push us-central1-docker.pkg.dev/qwiklabs-gcp-04-aeed7da94d2c/sandbox-repo/hello-app:v2
 ```
 #### Update the Deployment to Use the New Image ####
 ##### Edit the helloweb-deployment.yaml file to use the updated image #####
@@ -322,13 +323,13 @@ nano helloweb-deployment.yaml
 
 ##### Update the image field to #####
 ```
-image: us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2
+image: us-central1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
 ```
 
 ##### Save and close the file #####
 ##### Apply the updated manifest #####
 ```
-kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+kubectl apply -f helloweb-deployment.yaml --namespace=$NAMESPACE
 ```
 
 #### Expose the Deployment with a LoadBalancer ####
@@ -336,20 +337,20 @@ kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
 ```
 kubectl expose deployment helloweb \
     --namespace=gmp-awp5 \
-    --name=helloweb-service-rc8w \
+    --name=$SERVICE_NAME \
     --type=LoadBalancer \
     --port=8080 \
     --target-port=8080
 ```
 ```
-kubectl get service helloweb-service-rc8w --namespace=gmp-awp5
+kubectl get service $SERVICE_NAME --namespace=$NAMESPACE
 ```
 #### Verify the Deployment ####
 ##### Navigate to the external IP address in your browser. The page should display #####
 ```
 Hello, world!
 Version: 2.0.0
-Hostname: helloweb-<pod-name>
+Hostname: helloweb-6fc7476576-cvv5f
 ```
 
 ##### If the page does not load immediately, wait a few minutes for the service to become fully operational #####
