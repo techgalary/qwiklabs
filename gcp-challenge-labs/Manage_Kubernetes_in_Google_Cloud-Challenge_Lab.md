@@ -2,12 +2,12 @@
 
 ### Set Environment Variables ###
 ```
-export REPO_NAME=
-export CLUSTER_NAME=
-export ZONE=
-export NAMESPACE=
-export INTERVAL=
-export SERVICE_NAME=
+export REPO_NAME=demo-repo
+export CLUSTER_NAME=hello-world-5f3o
+export ZONE=us-central1-a
+export NAMESPACE=gmp-3hp4
+export INTERVAL=45s
+export SERVICE_NAME=helloweb-service-9kyw
 ```
 ### Task 1. Create a GKE cluster ###
 
@@ -22,8 +22,8 @@ gcloud services enable container.googleapis.com
 ```
 #### Execute below command to create Cluster ####
 ```
-gcloud container clusters create hello-world-4jzt \
-    --zone us-west1-a \
+gcloud container clusters create hello-world-5f3o \
+    --zone us-central1-a \
     --release-channel regular \
     --cluster-version 1.27.8 \
     --enable-autoscaling \
