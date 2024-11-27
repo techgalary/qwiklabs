@@ -245,9 +245,112 @@ image: gcr.io/google-samples/hello-app:1.0
 ```
 
 ### Task 5. Update and re-deploy your app ###
+
+#### Update the Deployment Manifest ####
+##### Edit the helloweb-deployment.yaml and replace the image field with below #####
 ```
+image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
 ```
+##### Save and close the file #####
+
+#### Delete the Existing Deployment ####
+##### Delete the helloweb deployment from the gmp-awp5 namespace #####
+```
+kubectl delete deployment helloweb --namespace=gmp-awp5
+```
+##### Confirm the deployment has been deleted #####
+```
+kubectl get deployments --namespace=gmp-awp5
+```
+
+#### Deploy the Updated Manifest ####
+##### Apply the updated helloweb-deployment.yaml manifest #####
+```
+kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+```
+##### Verify the deployment #####
+```
+kubectl get deployments --namespace=gmp-awp5
+```
+
+#### Verify the Deployment ####
+
+##### Check the status of the pods to ensure they are running ##### 
+```
+kubectl get pods --namespace=gmp-awp5
+```
+##### Verify the deployment in the Google Cloud Console ##### 
+#####  
+    1.Navigate to Kubernetes Engine > Workloads.
+    2. Ensure that the helloweb deployment is listed under the gmp-awp5 namespace with no errors 
+##### 
+
 ### Task 6. Containerize your code and deploy it onto the cluster ###
+#### Update the Application Code ####
+##### Navigate to the hello-app directory #####
+```
+cd hello-app
+```
+##### Edit the main.go file to update the version #####
+```
+nano main.go
+```
+##### On line 49, change the version to Version: 2.0.0 #####
+```
+fmt.Fprintf(w, "Hello, world!\nVersion: 2.0.0\nHostname: %s", hostname)
+```
+##### Save and close the file.#####
+#### Build the Docker Image ####
+##### Authenticate Docker to your Artifact Registry #####
+```
+gcloud auth configure-docker
+```
+##### Build the Docker image using the Dockerfile #####
+```
+docker build -t us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2 .
+```
+#### Push the Image to Artifact Registry ####
+##### Push the image to your repository #####
+```
+docker push us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2
+```
+#### Update the Deployment to Use the New Image ####
+##### Edit the helloweb-deployment.yaml file to use the updated image #####
+```
+nano helloweb-deployment.yaml
+```
+
+##### Update the image field to #####
+```
+image: us-west1-docker.pkg.dev/<YOUR_PROJECT_ID>/sandbox-repo/hello-app:v2
+```
+
+##### Save and close the file #####
+##### Apply the updated manifest #####
+```
+kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+```
+
+#### Expose the Deployment with a LoadBalancer ####
+##### Create a LoadBalancer service named helloweb-service-rc8w #####
+```
+kubectl expose deployment helloweb \
+    --namespace=gmp-awp5 \
+    --name=helloweb-service-rc8w \
+    --type=LoadBalancer \
+    --port=8080 \
+    --target-port=8080
 ```
 ```
+kubectl get service helloweb-service-rc8w --namespace=gmp-awp5
+```
+#### Verify the Deployment ####
+##### Navigate to the external IP address in your browser. The page should display #####
+```
+Hello, world!
+Version: 2.0.0
+Hostname: helloweb-<pod-name>
+```
+
+##### If the page does not load immediately, wait a few minutes for the service to become fully operational #####
 
