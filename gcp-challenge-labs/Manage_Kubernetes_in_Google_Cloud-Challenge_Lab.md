@@ -138,9 +138,113 @@ textPayload:"invalid image name"
 Name the metric invalid_image_name_errors and save it.
 ######
 
+###### Create Alerting Policy
+1. In the Google Cloud Console, navigate to Monitoring > Alerting > Click Create Policy.
+2. Add a condition using the invalid_image_name_errors metric: Choose Logs-based Metric and select invalid_image_name_errors.
+3. Set the threshold to trigger an alert when the error count exceeds 1.
+4. Configure notification channels to send alerts (e.g., email, SMS).
+5. Save the alerting policy.
+######
+##### Fix the Manifest and Redeploy #####
+###### Locate the image field and Update the helloweb-deployment.yaml ###### 
+```
+image: gcr.io/google-samples/hello-app:1.0
+```
+ ###### Apply the manifest ######
+ ```
+kubectl apply -f helloweb-deployment.yaml --namespace=gmp-awp5
+```
+###### Check application status ######
+```
+kubectl get services --namespace=gmp-awp5
+```
+
+##### Test the Alert Policy again #####
+###### Reintroduce an invalid image name in the manifest temporarily and redeploy to test the alerting mechanism ###### 
+```
+image: invalid/image:name
+```
+###### 
+1. Verify that the alert is triggered in the Google Cloud Console.
+2. Revert the manifest to the valid image and redeploy.
+###### 
+
 ### Task 4. Create a logs-based metric and alerting policy ###
+##### 
+1. Open Logs Explorer in the Google Cloud Console:
+2. Navigate to Logging > Logs Explorer.
+3. Build the Query:
+In the Query Builder, specify the resource type and severity level
+#####
 ```
+resource.type="k8s_pod"
+severity="ERROR"
+textPayload:"InvalidImageName"
 ```
+#####
+4. Run the query to confirm it captures logs for errors like:
+#####
+```
+Error: InvalidImageName
+Failed to apply default image tag "<todo>": couldn't parse image reference "<todo>": invalid reference format
+```
+#####
+Create the Metric:
+#####
+#####
+1. Click Save Query > Create Metric.
+2. In the Create logs-based metric dialog:
+    Metric Type: Counter
+    Log Metric Name: pod-image-errors
+3. Save the metric.
+
+#### Create an Alerting Policy ####
+#####
+1. Open Monitoring in the Google Cloud Console:
+2. Navigate to Monitoring > Alerting.
+3. Create a New Alerting Policy:
+4. Click Create Policy.
+   Add a Condition:
+        Click Add Condition and configure it as follows:
+        Target: Select the logs-based metric pod-image-errors.
+        Configuration:
+        Rolling Window: 10 min
+        Rolling Window Function: Count
+        Time Series Aggregation: Sum
+        Condition Type: Threshold
+        Threshold Position: Above threshold
+        Threshold Value: 0
+        Alert Trigger: Any time series violates.
+        Save the condition.
+5. Skip Notification Channel:
+       On the Notifications page, skip adding a notification channel (as per the instructions).
+6. Name the Alerting Policy:
+       Set the policy name to Pod Error Alert.
+7. Review and Save:
+       Review your alerting policy and click Save.
+#####
+####
+Verify Your Setup
+####
+#####
+1. Simulate an Error:
+   Temporarily deploy a manifest with an invalid image name to generate InvalidImageName errors:
+#####
+```
+    image: invalid/image:name
+```
+#####
+2. Check Logs-Based Metric:
+    Go to Logging > Logs-based Metrics and ensure pod-image-errors is capturing the logs.
+3. Verify Alert Trigger:
+    Navigate to Monitoring > Alerting and ensure the Pod Error Alert policy is active and detecting the error.
+4. Fix the Error:
+    Revert the manifest to a valid image and redeploy:
+#####
+```
+image: gcr.io/google-samples/hello-app:1.0
+```
+
 ### Task 5. Update and re-deploy your app ###
 ```
 ```
