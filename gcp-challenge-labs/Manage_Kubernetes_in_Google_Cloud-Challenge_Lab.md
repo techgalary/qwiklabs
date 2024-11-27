@@ -188,9 +188,7 @@ textPayload:"InvalidImageName"
 Error: InvalidImageName
 Failed to apply default image tag "<todo>": couldn't parse image reference "<todo>": invalid reference format
 ```
-#####
-Create the Metric:
-#####
+#### Create the Metric ####
 #####
 1. Click Save Query > Create Metric.
 2. In the Create logs-based metric dialog:
