@@ -138,7 +138,8 @@ textPayload:"invalid image name"
 Name the metric invalid_image_name_errors and save it.
 ######
 
-###### Create Alerting Policy
+###### Create Alerting Policy ######
+######
 1. In the Google Cloud Console, navigate to Monitoring > Alerting > Click Create Policy.
 2. Add a condition using the invalid_image_name_errors metric: Choose Logs-based Metric and select invalid_image_name_errors.
 3. Set the threshold to trigger an alert when the error count exceeds 1.
