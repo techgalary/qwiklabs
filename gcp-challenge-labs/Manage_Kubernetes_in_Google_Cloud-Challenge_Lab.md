@@ -133,7 +133,7 @@ Create a query to find logs related to the invalid image name error
 ######
 ```
 resource.type="k8s_pod"
-severity="ERROR"
+severity="WARNING"
 textPayload:"InvalidImageName"
 ```
 ###### Click Save Query and then Create Metric.
