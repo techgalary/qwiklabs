@@ -203,8 +203,7 @@ In the Query Builder, specify the resource type and severity level
 #####
 ```
 resource.type="k8s_pod"
-severity="ERROR"
-textPayload:"InvalidImageName"
+severity=WARNING
 ```
 #####
 4. Run the query to confirm it captures logs for errors like:
