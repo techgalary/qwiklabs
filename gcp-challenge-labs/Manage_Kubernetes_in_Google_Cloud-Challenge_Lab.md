@@ -26,7 +26,7 @@ gcloud services enable container.googleapis.com
 gcloud container clusters create $CLUSTER_NAME \
     --zone $ZONE \
     --release-channel regular \
-    --cluster-version 1.27.8 \
+    --cluster-version 1.30.5 \
     --enable-autoscaling \
     --num-nodes 3 \
     --min-nodes 2 \
