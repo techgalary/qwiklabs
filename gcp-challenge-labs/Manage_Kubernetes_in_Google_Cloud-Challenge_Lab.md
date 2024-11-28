@@ -330,12 +330,12 @@ gcloud auth configure-docker
 ```
 ##### Build the Docker image using the Dockerfile #####
 ```
-docker build -t us-west1-docker.pkg.dev/qwiklabs-gcp-04-aeed7da94d2c/sandbox-repo/hello-app:v2 .
+docker build -t us-east4-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2 .
 ```
 #### Push the Image to Artifact Registry ####
 ##### Push the image to your repository #####
 ```
-docker push us-west1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
+docker push us-east4-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
 ```
 #### Update the Deployment to Use the New Image ####
 ##### Edit the helloweb-deployment.yaml file to use the updated image #####
@@ -345,7 +345,7 @@ nano helloweb-deployment.yaml
 
 ##### Update the image field to #####
 ```
-image: us-west1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
+image: us-east4-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
 ```
 
 ##### Save and close the file #####
