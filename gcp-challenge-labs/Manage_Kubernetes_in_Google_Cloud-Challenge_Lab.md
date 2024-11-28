@@ -3,12 +3,12 @@
 ### Set Environment Variables ###
 ```
 export REPO_NAME=demo-repo
-export CLUSTER_NAME=hello-world-fn6b
-export ZONE=us-west1-a
-export NAMESPACE=gmp-fdnh
+export CLUSTER_NAME=hello-world-3a3c
+export ZONE=us-east4-a
+export NAMESPACE=gmp-mw85
 export INTERVAL=45s
-export SERVICE_NAME=helloweb-service-sk7t
-export PROJECT_ID=qwiklabs-gcp-03-b43809c2af1a
+export SERVICE_NAME=helloweb-service-iqjm
+export PROJECT_ID=qwiklabs-gcp-00-ef90497ac793
 ```
 ### Task 1. Create a GKE cluster ###
 
