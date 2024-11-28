@@ -132,9 +132,9 @@ gcloud services enable logging.googleapis.com
 Create a query to find logs related to the invalid image name error
 ######
 ```
-resource.type="k8s_container"
+resource.type="k8s_pod"
 severity="ERROR"
-textPayload:("InvalidImageName" OR "couldn't parse image reference")
+textPayload:"InvalidImageName"
 ```
 ###### Click Save Query and then Create Metric.
 1. Click Create Metric at the top of the Logs Explorer.
