@@ -133,19 +133,42 @@ Create a query to find logs related to the invalid image name error
 ######
 ```
 resource.type="k8s_container"
-textPayload:"invalid image name"
+severity="ERROR"
+textPayload:("InvalidImageName" OR "couldn't parse image reference")
 ```
 ###### Click Save Query and then Create Metric.
-Name the metric invalid_image_name_errors and save it.
+1. Click Create Metric at the top of the Logs Explorer.
+2. For Metric Type, choose Counter.
+3. Enter the metric name: pod-image-errors.
+4. Save the metric.
 ######
 
 ###### Create Alerting Policy ######
 ######
-1. In the Google Cloud Console, navigate to Monitoring > Alerting > Click Create Policy.
-2. Add a condition using the invalid_image_name_errors metric: Choose Logs-based Metric and select invalid_image_name_errors.
-3. Set the threshold to trigger an alert when the error count exceeds 1.
-4. Configure notification channels to send alerts (e.g., email, SMS).
-5. Save the alerting policy.
+1. Go to Monitoring: Navigate to Monitoring > Alerting in the GCP Console.
+2. Create a New Alerting Policy:
+Click + Create Policy.
+Add a Condition:
+Click Add Condition.
+Select the logs-based metric pod-image-errors created earlier.
+Configure the condition:
+Rolling Window: 10 minutes
+Rolling Window Function: Count
+Time Series Aggregation: Sum
+Condition Type: Threshold
+Threshold Position: Above threshold
+Threshold Value: 0
+Alert Trigger: Any time series violates
+Save the condition.
+Name the Alerting Policy:
+
+Enter the name: Pod Error Alert.
+Skip Notification Channels:
+
+Since the instructions specify to disable the notification channel, you can leave this step blank.
+Save the Policy: Click Save Policy to finalize.
+
+
 ######
 ##### Fix the Manifest and Redeploy #####
 ###### Locate the image field and Update the helloweb-deployment.yaml ###### 
