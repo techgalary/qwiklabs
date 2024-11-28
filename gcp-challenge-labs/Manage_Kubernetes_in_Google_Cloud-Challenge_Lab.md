@@ -3,12 +3,12 @@
 ### Set Environment Variables ###
 ```
 export REPO_NAME=demo-repo
-export CLUSTER_NAME=hello-world-5f3o
-export ZONE=us-central1-a
-export NAMESPACE=gmp-3hp4
+export CLUSTER_NAME=hello-world-fn6b
+export ZONE=us-west1-a
+export NAMESPACE=gmp-fdnh
 export INTERVAL=45s
-export SERVICE_NAME=helloweb-service-9kyw
-export PROJECT_ID=qwiklabs-gcp-04-aeed7da94d2c
+export SERVICE_NAME=helloweb-service-sk7t
+export PROJECT_ID=qwiklabs-gcp-03-b43809c2af1a
 ```
 ### Task 1. Create a GKE cluster ###
 
@@ -64,7 +64,7 @@ containers:
     name: metrics
 
 ```
-#### Deploy the application on the gmp-awp5 namespace ####
+#### Deploy the application on the gmp-fdnh namespace ####
 ```
 kubectl apply -f prometheus-app.yaml --namespace=$NAMESPACE
 
@@ -255,7 +255,7 @@ image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
 ##### Save and close the file #####
 
 #### Delete the Existing Deployment ####
-##### Delete the helloweb deployment from the gmp-3hp4 namespace #####
+##### Delete the helloweb deployment from the gmp-fdnh namespace #####
 ```
 kubectl delete deployment helloweb --namespace=$NAMESPACE
 ```
@@ -313,7 +313,7 @@ docker build -t us-west1-docker.pkg.dev/qwiklabs-gcp-04-aeed7da94d2c/sandbox-rep
 #### Push the Image to Artifact Registry ####
 ##### Push the image to your repository #####
 ```
-docker push us-central1-docker.pkg.dev/qwiklabs-gcp-04-aeed7da94d2c/sandbox-repo/hello-app:v2
+docker push us-west1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
 ```
 #### Update the Deployment to Use the New Image ####
 ##### Edit the helloweb-deployment.yaml file to use the updated image #####
@@ -323,7 +323,7 @@ nano helloweb-deployment.yaml
 
 ##### Update the image field to #####
 ```
-image: us-central1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
+image: us-west1-docker.pkg.dev/$PROJECT_ID/sandbox-repo/hello-app:v2
 ```
 
 ##### Save and close the file #####
@@ -333,10 +333,10 @@ kubectl apply -f helloweb-deployment.yaml --namespace=$NAMESPACE
 ```
 
 #### Expose the Deployment with a LoadBalancer ####
-##### Create a LoadBalancer service named helloweb-service-rc8w #####
+##### Create a LoadBalancer service named helloweb-service-sk7t #####
 ```
 kubectl expose deployment helloweb \
-    --namespace=gmp-awp5 \
+    --namespace=$NAMESPACE \
     --name=$SERVICE_NAME \
     --type=LoadBalancer \
     --port=8080 \
