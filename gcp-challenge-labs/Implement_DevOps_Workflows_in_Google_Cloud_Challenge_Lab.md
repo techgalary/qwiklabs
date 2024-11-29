@@ -278,7 +278,7 @@ kubectl get service dev-deployment-service -n dev
 http://<EXTERNAL_IP>:8080/red
 ```
 
-#### Step 2: Build the Second Production Deployment ####
+#### Build the Second Production Deployment ####
 #### Switch to the master Branch ####
 ```
 git checkout master
