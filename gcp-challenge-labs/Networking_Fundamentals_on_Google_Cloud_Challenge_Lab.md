@@ -3,9 +3,10 @@
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
 ### Export the Variables ###
+```
 export REGION=
 export ZONE=
-
+```
 ### Task 1. Create multiple web server instances ###
 ```
 gcloud compute instances create web1 \
