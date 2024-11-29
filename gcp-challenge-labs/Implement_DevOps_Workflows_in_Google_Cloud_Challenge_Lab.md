@@ -65,6 +65,10 @@ gcloud container clusters create $CLUSTER_NAME \
 
 ```
 #### Create Prod and Dev Namespace ####
+
+```
+gcloud container clusters get-credentials hello-cluster --zone $ZONE --project qwiklabs-gcp-03-8d29001942d1
+```
 ```
 kubectl create namespace prod
 kubectl create namespace dev
