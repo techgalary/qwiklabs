@@ -4,8 +4,8 @@
 
 ### Export the Variables ###
 ```
-export REGION=
-export ZONE=
+export REGION="us-central1"
+export ZONE="us-central1-b"
 ```
 ### Task 1. Create multiple web server instances ###
 ```
