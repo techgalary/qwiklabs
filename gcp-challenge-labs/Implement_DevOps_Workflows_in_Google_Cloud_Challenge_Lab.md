@@ -56,7 +56,7 @@ gcloud auth configure-docker $REGION-docker.pkg.dev
 gcloud container clusters create $CLUSTER_NAME \
 --zone $ZONE \
 --release-channel regular \
---cluster-version 1.35 \
+--cluster-version 1.29 \
 --enable-autoscaling \
 --num-nodes 3 \
 --min-nodes 2 \
