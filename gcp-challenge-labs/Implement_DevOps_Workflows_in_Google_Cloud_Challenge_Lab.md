@@ -101,8 +101,8 @@ done
 ```
 git add .
 git commit -m "Initial commit with sample code"
-git branch -M main
-git push -u origin main
+git branch -M master
+git push -u origin master
 ```
 #### Create the Dev Branch ####
 ```
