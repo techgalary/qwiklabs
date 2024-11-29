@@ -4,10 +4,8 @@
 
 ### Set Environment Variables ###
 ```
-export REGION=
-export ZONE=
-export USER_EMAIL=
-export GITHUB_USERNAME=
+export REGION=us-east1
+export ZONE=us-east1-c
 export CLUSTER_NAME=hello-cluster
 ```
 ### Task 1. Create the lab resources ###
