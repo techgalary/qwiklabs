@@ -1,4 +1,4 @@
-## 🚀 Implement DevOps Workflows in Google Cloud: Challenge Lab | [GCP330](https://www.cloudskillsboost.google/catalog_lab/464399))
+## 🚀 Implement DevOps Workflows in Google Cloud: Challenge Lab | [GCP330](https://www.cloudskillsboost.google/catalog_lab/2889)
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 gcloud container clusters create hello-cluster \
