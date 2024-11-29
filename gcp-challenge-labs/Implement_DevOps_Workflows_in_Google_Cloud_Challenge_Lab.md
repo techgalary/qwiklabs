@@ -4,8 +4,11 @@
 
 ### Set Environment Variables ###
 ```
-export REGION="REGION"
-export ZONE="ZONE"
+export REGION=
+export ZONE=
+export USER_EMAIL=
+export GITHUB_USERNAME=
+export CLUSTER_NAME=hello-cluster
 ```
 ### Task 1. Create the lab resources ###
 #### Enable APIs ####
@@ -38,24 +41,24 @@ echo ${GITHUB_USERNAME}
 ```
 gcloud artifacts repositories create my-repository \
     --repository-format=docker \
-    --location=REGION \
+    --location=$REGION \
     --description="Docker repository for storing container images"
 ```
 #### Verify the repository ####
 ```
-gcloud artifacts repositories list --location=REGION
+gcloud artifacts repositories list --location=$REGION
 ```
 #### Configure Docker Authentication ####
 ```
-gcloud auth configure-docker REGION-docker.pkg.dev
+gcloud auth configure-docker $REGION-docker.pkg.dev
 
 ```
 #### Create a GKE Standard cluster ####
 ```
-gcloud container clusters create hello-cluster \
---zone us-east1-c \
+gcloud container clusters create $CLUSTER_NAME \
+--zone $ZONE \
 --release-channel regular \
---cluster-version 1.29 \
+--cluster-version 1.35 \
 --enable-autoscaling \
 --num-nodes 3 \
 --min-nodes 2 \
@@ -78,7 +81,7 @@ gh repo create sample-app --public --source=. --remote=origin --confirm
 ```
 #### Clone the repo ####
 ```
-git clone https://github.com/<your-username>/sample-app.git
+git clone https://github.com/$GITHUB_USERNAME/sample-app.git
 cd sample-app
 ```
 #### Copy Sample code ####
@@ -119,7 +122,7 @@ gcloud builds triggers create github \
 ```
 gcloud builds triggers create github \
     --repo-name="sample-app" \
-    --repo-owner="<your-github-username>" \
+    --repo-owner="$GITHUB_USERNAME" \
     --branch-pattern="^dev$" \
     --name="sample-app-dev-deploy" \
     --build-config="cloudbuild-dev.yaml"
@@ -329,7 +332,7 @@ gcloud builds list
 ```
 #### Look for the build ID corresponding to the v1.0 deployment of the production application ####
 ```
-gcr.io/<PROJECT_ID>/sample-app:v1.0
+gcr.io/$PROJECT_ID/sample-app:v1.0
 ```
 #### Update the Deployment in the prod Namespace ####
 #### Edit the Deployment Manifest: If the prod/deployment.yaml file was used to deploy, edit the file to use the v1.0 container image ####
@@ -363,7 +366,7 @@ gcloud builds submit --config cloudbuild.yaml --substitutions=_VERSION=v1.0
 #### Update the deployment to use the rebuilt image ####
 ```
 kubectl set image deployment/production-deployment \
-production-container=gcr.io/<PROJECT_ID>/sample-app:v1.0 -n prod
+production-container=gcr.io/$PROJECT_ID/sample-app:v1.0 -n prod
 ```
 #### Verify the rollout ####
 ```
