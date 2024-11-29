@@ -127,16 +127,16 @@ gcloud builds triggers create github \
 ### Task 4. Deploy the first versions of the application ###
 #### Build the First Development Deployment ####
 
-##### Inspect and Update cloudbuild-dev.yaml #####
+#### Inspect and Update cloudbuild-dev.yaml ####
 ```
 sed -i "s/<version>/v1.0/g" sample-app/cloudbuild-dev.yaml
 ```
-##### Update dev/deployment.yaml: Replace <todo> and PROJECT_ID with the actual container image name and project ID: #####
+#### Update dev/deployment.yaml: Replace <todo> and PROJECT_ID with the actual container image name and project ID: ####
 ```
 sed -i "s|<todo>|gcr.io/$PROJECT_ID/sample-app:v1.0|g" sample-app/dev/deployment.yaml
 sed -i "s|PROJECT_ID|$PROJECT_ID|g" sample-app/dev/deployment.yaml
 ```
-##### Commit and Push Changes to dev Branch #####
+#### Commit and Push Changes to dev Branch ####
 ```
 cd sample-app
 git checkout dev
@@ -144,11 +144,11 @@ git add cloudbuild-dev.yaml dev/deployment.yaml
 git commit -m "Update dev deployment with version v1.0"
 git push origin dev
 ```
-##### Check the deployment in the dev namespace #####
+#### Check the deployment in the dev namespace ####
 ```
 kubectl get deployments -n dev
 ```
-##### Expose the Development Deployment #####
+#### Expose the Development Deployment ####
 ``` 
 kubectl expose deployment development-deployment \
     --type=LoadBalancer \
@@ -157,26 +157,26 @@ kubectl expose deployment development-deployment \
     --target-port=<target-port> \
     -n dev
 ```
-##### Verify the Application #####
+#### Verify the Application ####
 ```
 kubectl get service dev-deployment-service -n dev
 ```
-##### Test the Application #####
+#### Test the Application ####
 ```
 http://<EXTERNAL_IP>:8080/blue
 ```
 #### Build the First Production Deployment ####
-##### Inspect and Update cloudbuild.yaml #####
+#### Inspect and Update cloudbuild.yaml ####
 ```
 sed -i "s/<version>/v1.0/g" sample-app/cloudbuild.yaml
 ```
-##### Update prod/deployment.yaml: Replace <todo> and PROJECT_ID with the actual container image name and project ID #####
+#### Update prod/deployment.yaml: Replace <todo> and PROJECT_ID with the actual container image name and project ID ####
 ```
 sed -i "s|<todo>|gcr.io/YOUR_PROJECT_ID/sample-app:v1.0|g" sample-app/prod/deployment.yaml
 sed -i "s|PROJECT_ID|YOUR_PROJECT_ID|g" sample-app/prod/deployment.yaml
 ```
 
-##### Commit and Push Changes to master Branch #####
+#### Commit and Push Changes to master Branch ####
 ```
 git checkout master
 git add cloudbuild.yaml prod/deployment.yaml
@@ -184,17 +184,17 @@ git commit -m "Update production deployment with version v1.0"
 git push origin master
 ```
 
-##### Verify Build and Deployment #####
+#### Verify Build and Deployment ####
 
-##### Check the build status in Cloud Build #####
+#### Check the build status in Cloud Build ####
 ```
 gcloud builds list
 ```
-##### Check the deployment in the prod namespace #####
+#### Check the deployment in the prod namespace ####
 ```
 kubectl get deployments -n prod
 ```
-##### Expose the Production Deployment #####
+#### Expose the Production Deployment ####
 ```
 kubectl expose deployment production-deployment \
     --type=LoadBalancer \
@@ -203,29 +203,29 @@ kubectl expose deployment production-deployment \
     --target-port=<target-port> \
     -n prod
 ```
-###### Replace <target-port> with the port specified in the Dockerfile (e.g., 8080) ######
+#### Replace <target-port> with the port specified in the Dockerfile (e.g., 8080) ####
 
-##### Verify Application #####
+#### Verify Application ####
 
-###### Retrieve the external IP ######
+#### Retrieve the external IP ####
 ```
 kubectl get service prod-deployment-service -n prod
 ```
 
-###### Test the application by visiting ######
+#### Test the application by visiting ####
 ```
 http://<EXTERNAL_IP>:8080/blue
 ```
 
 ### Task 5. Deploy the second versions of the application ###
 #### Build the Second Development Deployment #### 
-##### Switch to the dev Branch ####
+#### Switch to the dev Branch ####
 ```
 cd sample-app
 git checkout dev
 ```
 
-##### Update the main.go File: Add the updated main() function and the new redHandler function #####
+#### Update the main.go File: Add the updated main() function and the new redHandler function ####
 ```
 echo 'func main() {
     http.HandleFunc("/blue", blueHandler)
@@ -241,17 +241,17 @@ func redHandler(w http.ResponseWriter, r *http.Request) {
 }' > main.go
 ```
 
-##### Update cloudbuild-dev.yaml: Change the Docker image version to v2.0 #####
+#### Update cloudbuild-dev.yaml: Change the Docker image version to v2.0 ####
 ```
 sed -i "s/v1.0/v2.0/g" cloudbuild-dev.yaml
 ```
 
-##### Update dev/deployment.yaml: Update the container image name to use version v2.0 #####
+#### Update dev/deployment.yaml: Update the container image name to use version v2.0 ####
 ```
 sed -i "s|v1.0|v2.0|g" dev/deployment.yaml
 ```
 
-##### Commit and Push Changes #####
+#### Commit and Push Changes ####
 ```
 git add main.go cloudbuild-dev.yaml dev/deployment.yaml
 git commit -m "Update dev deployment to version v2.0 with redHandler"
@@ -260,115 +260,115 @@ git push origin dev
 
 #### Verify Build and Deployment ####
 
-##### Check build status in Cloud Build #####
+#### Check build status in Cloud Build ####
 ```
 gcloud builds list
 ```
-##### Check the deployment in the dev namespace #####
+#### Check the deployment in the dev namespace ####
 ```
 kubectl get deployments -n dev
 ```
-##### Test the Application #####
-###### Get the LoadBalancer IP ######
+#### Test the Application ####
+#### Get the LoadBalancer IP ####
 ```
 kubectl get service dev-deployment-service -n dev
 ```
-###### In browser access below link ######
+#### In browser access below link ####
 ```
 http://<EXTERNAL_IP>:8080/red
 ```
 
 #### Step 2: Build the Second Production Deployment ####
-##### Switch to the master Branch #####
+#### Switch to the master Branch ####
 ```
 git checkout master
 ```
-##### Update the main.go File: Use the same updated main() function and redHandler function as in the dev branch #####
+#### Update the main.go File: Use the same updated main() function and redHandler function as in the dev branch ####
 
-##### Update cloudbuild.yaml: Change the Docker image version to v2.0 #####
+#### Update cloudbuild.yaml: Change the Docker image version to v2.0 ####
 ```
 sed -i "s/v1.0/v2.0/g" cloudbuild.yaml
 ```
-##### Update prod/deployment.yaml: Update the container image name to use version v2.0 #####
+#### Update prod/deployment.yaml: Update the container image name to use version v2.0 ####
 ```
 sed -i "s|v1.0|v2.0|g" prod/deployment.yaml
 ```
 
-##### Commit and Push Changes #####
+#### Commit and Push Changes ####
 ```
 git add main.go cloudbuild.yaml prod/deployment.yaml
 git commit -m "Update production deployment to version v2.0 with redHandler"
 git push origin master
 ```
 
-##### Verify Build and Deployment #####
+#### Verify Build and Deployment ####
 
-##### Check build status in Cloud Build #####
+#### Check build status in Cloud Build ####
 ```
 gcloud builds list
 ```
-##### Check the deployment in the prod namespace #####
+#### Check the deployment in the prod namespace ####
 ```
 kubectl get deployments -n prod
 ```
-##### Test the Application #####
+#### Test the Application ####
 
-##### Get the LoadBalancer IP #####
+#### Get the LoadBalancer IP ####
 ```
 kubectl get service prod-deployment-service -n prod
 ```
-##### In browser access below link #####
+#### In browser access below link ####
 ```
 http://<EXTERNAL_IP>:8080/red
 ```
 ### Task 6. Roll back the production deployment ###
 #### Inspect the Cloud Build History ####
-##### List the Cloud Build history #####
+#### List the Cloud Build history ####
 ```
 gcloud builds list
 ```
-##### Look for the build ID corresponding to the v1.0 deployment of the production application #####
+#### Look for the build ID corresponding to the v1.0 deployment of the production application ####
 ```
 gcr.io/<PROJECT_ID>/sample-app:v1.0
 ```
-##### Update the Deployment in the prod Namespace #####
-##### Edit the Deployment Manifest: If the prod/deployment.yaml file was used to deploy, edit the file to use the v1.0 container image #####
+#### Update the Deployment in the prod Namespace ####
+#### Edit the Deployment Manifest: If the prod/deployment.yaml file was used to deploy, edit the file to use the v1.0 container image ####
 ```
 sed -i "s|v2.0|v1.0|g" prod/deployment.yaml
 ```
-##### Apply the Updated Deployment #####
+#### Apply the Updated Deployment ####
 ```
 kubectl apply -f prod/deployment.yaml -n prod
 ```
 
-##### Verify the Rollback: Check the rollout status #####
+#### Verify the Rollback: Check the rollout status ####
 ```
 kubectl rollout status deployment production-deployment -n prod
 ```
 #### Verify the Application ####
-##### Get the Load Balancer IP for the production service #####
+#### Get the Load Balancer IP for the production service ####
 ```
 kubectl get service prod-deployment-service -n prod
 ```
-##### In browser access the link #####
+#### In browser access the link ####
 
 ```
 http://<EXTERNAL_IP>:8080/red
 ```
-##### Rebuild the v1.0 image using Cloud Build #####
+#### Rebuild the v1.0 image using Cloud Build ####
 ```
 gcloud builds submit --config cloudbuild.yaml --substitutions=_VERSION=v1.0
 ```
 
-##### Update the deployment to use the rebuilt image #####
+#### Update the deployment to use the rebuilt image ####
 ```
 kubectl set image deployment/production-deployment \
 production-container=gcr.io/<PROJECT_ID>/sample-app:v1.0 -n prod
 ```
-##### Verify the rollout #####
+#### Verify the rollout ####
 ```
 kubectl rollout status deployment production-deployment -n prod
 ```
 
-##### Test the /red endpoint as described earlier to confirm the 404 response #####
+#### Test the /red endpoint as described earlier to confirm the 404 response ####
 
