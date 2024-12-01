@@ -4,8 +4,8 @@
 
 ### Set Environment Variables ###
 ```
-export REGION=us-east1
-export ZONE=us-east1-c
+export REGION="us-west1"
+export ZONE="us-west1-a
 export CLUSTER_NAME=hello-cluster
 ```
 ### Task 1. Create the lab resources ###
@@ -15,15 +15,14 @@ gcloud services enable container.googleapis.com \
     cloudbuild.googleapis.com \
     artifactregistry.googleapis.com
 ```
+
 #### Add the Kubernetes Developer role for the Cloud Build service account ####
 ```
-curl -sS https://webi.sh/gh | sh
-gh auth login
-gh api user -q ".login"
-GITHUB_USERNAME=$(gh api user -q ".login")
-git config --global user.name "${GITHUB_USERNAME}"
-git config --global user.email "${USER_EMAIL}"
-echo ${GITHUB_USERNAME}
+export PROJECT_ID=$(gcloud config get-value project)
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+--member=serviceAccount:$(gcloud projects describe $PROJECT_ID \
+--format="value(projectNumber)")@cloudbuild.gserviceaccount.com --role="roles/container.developer"
+
 ```
 #### Run the following commands to configure Git and GitHub in Cloud Shell ####
 ```
@@ -45,11 +44,6 @@ gcloud artifacts repositories create my-repository \
 #### Verify the repository ####
 ```
 gcloud artifacts repositories list --location=$REGION
-```
-#### Configure Docker Authentication ####
-```
-gcloud auth configure-docker $REGION-docker.pkg.dev
-
 ```
 #### Create a GKE Standard cluster ####
 ```
@@ -78,7 +72,7 @@ kubectl create namespace dev
 
 #### Create the GitHub Repository ####
 ```
-gh auth login
+git init
 gh repo create sample-app --public --source=. --remote=origin --confirm
 ```
 #### Clone the repo ####
@@ -92,9 +86,11 @@ gsutil cp -r gs://spls/gsp330/sample-app/* .
 ```
 #### Replace Zone and Region Placeholders ####
 ```
-for file in cloudbuild-dev.yaml cloudbuild.yaml; do
-    sed -i "s/$REGION/${REGION}/g" "$file"
-    sed -i "s/$ZONE/${ZONE}/g" "$file"
+export REGION="us-west1"
+export ZONE="us-west1-a"
+for file in sample-app/cloudbuild-dev.yaml sample-app/cloudbuild.yaml; do
+    sed -i "s/<your-region>/${REGION}/g" "$file"
+    sed -i "s/<your-zone>/${ZONE}/g" "$file"
 done
 ```
 ####  Commit and Push Changes ####
@@ -159,7 +155,7 @@ kubectl expose deployment development-deployment \
     --type=LoadBalancer \
     --name=dev-deployment-service \
     --port=8080 \
-    --target-port=<target-port> \
+    --target-port=8080 \
     -n dev
 ```
 #### Verify the Application ####
@@ -205,7 +201,7 @@ kubectl expose deployment production-deployment \
     --type=LoadBalancer \
     --name=prod-deployment-service \
     --port=8080 \
-    --target-port=<target-port> \
+    --target-port=8080 \
     -n prod
 ```
 #### Replace <target-port> with the port specified in the Dockerfile (e.g., 8080) ####
