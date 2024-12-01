@@ -5,8 +5,9 @@
 ### Set Environment Variables ###
 ```
 export REGION="us-west1"
-export ZONE="us-west1-a
-export CLUSTER_NAME=hello-cluster
+export ZONE="us-west1-a"
+export CLUSTER_NAME="hello-cluster"
+export PROJECT_ID="qwiklabs-gcp-02-fe293edd99b2"
 ```
 ### Task 1. Create the lab resources ###
 #### Enable APIs ####
@@ -173,8 +174,8 @@ sed -i "s/<version>/v1.0/g" sample-app/cloudbuild.yaml
 ```
 #### Update prod/deployment.yaml: Replace <todo> and PROJECT_ID with the actual container image name and project ID ####
 ```
-sed -i "s|<todo>|gcr.io/YOUR_PROJECT_ID/sample-app:v1.0|g" sample-app/prod/deployment.yaml
-sed -i "s|PROJECT_ID|YOUR_PROJECT_ID|g" sample-app/prod/deployment.yaml
+sed -i "s|<todo>|gcr.io/$PROJECT_ID/sample-app:v1.0|g" sample-app/prod/deployment.yaml
+sed -i "s|PROJECT_ID|$PROJECT_ID|g" sample-app/prod/deployment.yaml
 ```
 
 #### Commit and Push Changes to master Branch ####
