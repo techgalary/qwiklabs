@@ -4,8 +4,8 @@
 
 ### Set Environment Variables ###
 ```
-export REGION="us-west1"
-export ZONE="us-west1-a"
+export REGION="us-east1"
+export ZONE="us-east1-c"
 export CLUSTER_NAME="hello-cluster"
 export PROJECT_ID="qwiklabs-gcp-02-fe293edd99b2"
 ```
@@ -87,8 +87,8 @@ gsutil cp -r gs://spls/gsp330/sample-app/* .
 ```
 #### Replace Zone and Region Placeholders ####
 ```
-export REGION="us-west1"
-export ZONE="us-west1-a"
+export REGION="us-east1"
+export ZONE="us-east1-c"
 for file in sample-app/cloudbuild-dev.yaml sample-app/cloudbuild.yaml; do
     sed -i "s/<your-region>/${REGION}/g" "$file"
     sed -i "s/<your-zone>/${ZONE}/g" "$file"
