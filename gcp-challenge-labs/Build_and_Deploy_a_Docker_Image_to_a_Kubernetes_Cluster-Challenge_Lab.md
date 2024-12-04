@@ -50,7 +50,7 @@ docker push gcr.io/${PROJECT_ID}/echo-app:v1
 ```
 #### Verifying if image is uploaded to GCR ####
 ```
-gcloud container images list --repository=gcr.io/[PROJECT_ID]
+gcloud container images list --repository=gcr.io/${PROJECT_ID}
 ```
 ### Task 4. Deploy the application to the Kubernetes cluster ###
 
