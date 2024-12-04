@@ -7,9 +7,9 @@
 
 #### Set Environment Variables ###
 ``` bash
-export REGION=
-export ZONE=
-export PROJECT_ID=
+export REGION=us-east1
+export ZONE=us-east1-c 
+export PROJECT_ID=qwiklabs-gcp-01-40a4f90f7908
 ```
 
 #### Create Cluster ####
