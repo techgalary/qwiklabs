@@ -27,9 +27,10 @@ gcloud container clusters list
 
 ### Task 2. Build a tagged Docker image ###
 #### Download the archive file from the Cloud Storage Bucket ####
-``
+
+```
 gsutil cp gs://${PROJECT_ID}/echo-web.tar.gz .
-``
+```
 #### Extract the Archive ####
 ```
 tar -xvzf echo-web.tar.gz
