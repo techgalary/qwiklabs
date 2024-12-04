@@ -56,15 +56,18 @@ gcloud container images list --repository=gcr.io/${PROJECT_ID}
 
 #### Create the deployment ####
 ```
-kubectl create deployment echo-app --image=gcr.io/${PROJECT_ID}/echo-app:v1
+kubectl create deployment echo-web --image=gcr.io/${PROJECT_ID}/echo-app:v1
 ```
 ```
 gcloud container clusters get-credentials echo-cluster --zone=$ZONE
 ```
 #### Expose the deployment ####
 ```
-kubectl expose deployment echo-app --name echo-web \
-   --type LoadBalancer --port 80 --target-port 8000
+kubectl expose deployment echo-web \
+    --type=LoadBalancer \
+    --port=80 \
+    --target-port=8000
+
 ```
 ```
 kubectl get service echo-web
