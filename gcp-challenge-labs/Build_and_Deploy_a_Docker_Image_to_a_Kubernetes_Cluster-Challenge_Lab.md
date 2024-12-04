@@ -16,7 +16,7 @@ export PROJECT_ID=
 ```
 gcloud container clusters create echo-cluster \
     --num-nodes=1 \
-    --region=$REGION \
+    --zone=$ZONE \
     --machine-type=e2-standard-2 \
     --enable-ip-alias
 
@@ -34,21 +34,21 @@ gsutil cp gs://${PROJECT_ID}/echo-web.tar.gz .
 #### Extract the Archive ####
 ```
 tar -xvzf echo-web.tar.gz
-cd echo-web
+
 ```
 #### Build the Docker image ####
 ```
-docker build -t gcr.io/[PROJECT_ID]/echo-web:v1 .
+docker build -t echo-app:v1 .
 ```
 ```
 docker images
 ```
 ```
-docker tag echo-web:v1 gcr.io/[PROJECT_ID]/echo-web:v1
+docker tag echo-app:v1 gcr.io/${PROJECT_ID}/echo-app:v1
 ```
 ### Task 3. Push the image to the Google Container Registry ###
 ```
-docker push gcr.io/[PROJECT_ID]/echo-web:v1
+docker push gcr.io/${PROJECT_ID}/echo-app:v1
 ```
 #### Verifying if image is uploaded to GCR ####
 ```
