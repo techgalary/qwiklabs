@@ -4,10 +4,10 @@
 ## Solution [here]()
 ### Set Env Variables ###
 ``` bash
-export ZONE=
-export REGION=
-export PROJECT_ID=
-export CLUSTER_NAME=
+export ZONE=us-east4-b
+export REGION=us-east4
+export PROJECT_ID=qwiklabs-gcp-03-5b9b5f7956d3
+export CLUSTER_NAME=echo-cluster
 ```
 ### Task 1. Build and deploy the updated application with a new tag ###
 ```
