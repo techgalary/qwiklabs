@@ -6,7 +6,7 @@
 ### Task 1. Create a Kubernetes cluster ###
 
 #### Set Environment Variables ###
-```
+``` bash
 export REGION=
 export ZONE=
 export PROJECT_ID=
