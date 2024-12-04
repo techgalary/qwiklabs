@@ -16,9 +16,10 @@ export PROJECT_ID=
 ```
 gcloud container clusters create echo-cluster \
     --num-nodes=1 \
-    --node-locations=us-central1-a \
+    --region=$REGION \
     --machine-type=e2-standard-2 \
     --enable-ip-alias
+
 ```
 ```
 gcloud container clusters list
