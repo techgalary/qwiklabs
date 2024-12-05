@@ -1,6 +1,6 @@
 # Build and Deploy a Docker Image to a Kubernetes Cluster: Challenge Lab || [GSP304](https://www.cloudskillsboost.google/focuses/1738?parent=catalog) ||
 
-## Solution [here]()
+## Solution [here](https://youtu.be/vhJsi1Ivo_U)
 
 
 ### Task 1. Create a Kubernetes cluster ###
