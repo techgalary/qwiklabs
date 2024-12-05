@@ -45,6 +45,12 @@ docker images
 ```
 
 ### Task 3. Push the image to the Google Container Registry ###
+#### Tag the Docker Image for GCR ####
+
+```
+docker tag echo-app:v1 gcr.io/${PROJECT_ID}/echo-app:v1
+```
+
 ```
 docker push gcr.io/${PROJECT_ID}/echo-app:v1
 ```
