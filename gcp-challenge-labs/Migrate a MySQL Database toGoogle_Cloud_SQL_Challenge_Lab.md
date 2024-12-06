@@ -5,9 +5,10 @@
 #### Set Variables ####
 ```bash
 export INSTANCE_ID="wordpress-db-instance"
-export REGION="us-east1"
-export ZONE="us-east1-c"
+export REGION="europe-west1"
+export ZONE="europe-west1-c"
 export ROOT_PASSWORD="admin123"
+export BUCKET_NAME="qwiklabs-gcp-02-ee819ff00dd1"
 ```
 #### Create Cloud SQL Instance ####
 
@@ -22,9 +23,9 @@ gcloud sql instances create $INSTANCE_ID \
 ### Task 2: Configure the New Database ###
 #### Set Variables ####
 ``` bash
-DB_NAME="wordpress_db"
-DB_USER="wp_user"
-DB_PASSWORD="<wp_user_password>"
+export DB_NAME="wordpress_db"
+export DB_USER="wp_user"
+export DB_PASSWORD="<wp_user_password>"
 ```
 #### Create Database ####
 ```
@@ -49,7 +50,9 @@ mysqldump -u root -p wordpress_db > wordpress_db.sql
 
 #### Upload the SQL Dump to a GCS Bucket ####
 ```
-BUCKET_NAME="<your_bucket_name>"
+gcloud storage buckets create $BUCKET_NAME --location=REGION
+```
+```
 gsutil cp wordpress_db.sql gs://$BUCKET_NAME/
 ```
 #### Import the SQL Dump into Cloud SQL ####
