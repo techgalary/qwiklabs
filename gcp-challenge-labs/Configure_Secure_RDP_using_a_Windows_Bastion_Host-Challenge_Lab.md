@@ -1,4 +1,4 @@
-# Configure Secure RDP using a Windows Bastion Host: Challenge Lab <<<<< [GSP303](https://www.cloudskillsboost.google/focuses/1737?parent=catalog) >>>>>
+# Configure Secure RDP using a Windows Bastion Host: Challenge Lab // [GSP303](https://www.cloudskillsboost.google/focuses/1737?parent=catalog) //
 
 ### Set Variables ###
 ``` bash
