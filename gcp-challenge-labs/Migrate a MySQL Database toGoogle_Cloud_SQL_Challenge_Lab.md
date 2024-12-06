@@ -25,7 +25,7 @@ gcloud sql instances create $INSTANCE_ID \
 ``` bash
 export DB_NAME="wordpress_db"
 export DB_USER="wp_user"
-export DB_PASSWORD="<wp_user_password>"
+export DB_PASSWORD="password123"
 ```
 #### Create Database ####
 ```
