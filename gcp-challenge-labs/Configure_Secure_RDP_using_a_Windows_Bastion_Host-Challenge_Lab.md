@@ -2,8 +2,8 @@
 
 ### Set Variables ###
 ``` bash
-export REGION=
-export ZONE=
+export REGION=europe-west4
+export ZONE=europe-west4-b
 ```
 ### Task 1. Create the VPC network ###
 ```
