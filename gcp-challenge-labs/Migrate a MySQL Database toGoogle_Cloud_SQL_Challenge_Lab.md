@@ -5,9 +5,9 @@
 #### Set Variables ####
 ```bash
 INSTANCE_ID="wordpress-db-instance"
-REGION="us-central1"
-ZONE="us-central1-f"
-ROOT_PASSWORD="<strong_root_password>"
+REGION="us-east1"
+ZONE="us-east1-c"
+ROOT_PASSWORD="admin123"
 ```
 #### Create Cloud SQL Instance ####
 
