@@ -45,7 +45,8 @@ gcloud sql users list --instance=$INSTANCE_ID
 ### Task 3: Perform a Database Dump and Import the Data ###
 #### Export the Current database ####
 ```
-mysqldump -u root -p wordpress > wordpress_db.sql
+mysqldump -h blog -u root -p wordpress > wordpress_db.sql
+
 ```
 
 #### Upload the SQL Dump to a GCS Bucket ####
