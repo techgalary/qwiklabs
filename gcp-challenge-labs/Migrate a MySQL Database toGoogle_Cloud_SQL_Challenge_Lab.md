@@ -51,7 +51,7 @@ mysqldump -u blogadmin -p wordpress > wordpress_db.sql
 
 #### Upload the SQL Dump to a GCS Bucket ####
 ```
-gcloud storage buckets create $BUCKET_NAME --location=REGION
+gcloud storage buckets create gs://${BUCKET_NAME} --location=REGION
 ```
 ```
 gsutil cp wordpress_db.sql gs://$BUCKET_NAME/
