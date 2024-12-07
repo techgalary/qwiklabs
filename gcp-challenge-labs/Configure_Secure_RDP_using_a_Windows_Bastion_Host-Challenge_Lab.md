@@ -1,4 +1,5 @@
 # Configure Secure RDP using a Windows Bastion Host: Challenge Lab || [GSP303](https://www.cloudskillsboost.google/focuses/1737?parent=catalog) 
+## Youtube Solution Video [here](https://youtu.be/iQdhq6gHBWc?si=bWUxCz_mIFi3q7aj)
 
 ### Set Variables ###
 ``` bash
@@ -33,6 +34,5 @@ gcloud compute reset-windows-password vm-bastionhost --user app_admin --zone $ZO
 gcloud compute reset-windows-password vm-securehost --user app_admin --zone $ZONE
 ```
 ### Task 3. Connect to the secure host and configure Internet Information Server ###
-```
-Refer the video for configuring this
-```
+#### Refer the video (https://youtu.be/iQdhq6gHBWc?si=bWUxCz_mIFi3q7aj) for configuring this
+
