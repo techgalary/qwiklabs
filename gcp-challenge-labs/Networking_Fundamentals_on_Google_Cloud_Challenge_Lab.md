@@ -1,4 +1,4 @@
-## 🚀 Networking Fundamentals on Google Cloud: Challenge Lab | [ARC124](https://partner.cloudskillsboost.google/catalog_lab/6528)
+## 🚀 Networking Fundamentals on Google Cloud: Challenge Lab | [ARC124](https://www.cloudskillsboost.google/catalog_lab/6528)
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
