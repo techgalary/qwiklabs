@@ -1,5 +1,7 @@
 ## 🚀 Networking Fundamentals on Google Cloud: Challenge Lab | [ARC124](https://www.cloudskillsboost.google/catalog_lab/6528)
 
+## Solution Video [LINK](https://youtu.be/HdpptVcxZak)
+
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
 ### Export the Variables ###
