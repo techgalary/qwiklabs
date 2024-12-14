@@ -1,4 +1,6 @@
-## 🚀 Build a Website on Google Cloud: Challenge Lab | [GSP319](https://partner.cloudskillsboost.google/catalog_lab/2692)
+## 🚀 Build a Website on Google Cloud: Challenge Lab | [GSP319](https://www.cloudskillsboost.google/catalog_lab/2692)
+
+## Youtube [link](https://youtu.be/Xt2pCDagCM4)
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
