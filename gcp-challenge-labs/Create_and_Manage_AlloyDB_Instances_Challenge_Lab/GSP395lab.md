@@ -1,8 +1,9 @@
 
 ## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [GSP395](https://www.cloudskillsboost.google/focuses/50123?parent=catalog)
 
+## Youtube link [Here](https://www.youtube.com/watch?v=jev4qYDhFS4)
 
-## 🌐 **Guide to Complete the Challenge Lab:**
+## 🌐 **Guide to Complete the Challenge Lab**
 
 ### Set the Environment Variables #######
 ```bash
