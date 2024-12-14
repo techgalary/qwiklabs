@@ -1,6 +1,6 @@
 # Manage Kubernetes in Google Cloud: Challenge Lab || [GSP510](https://www.cloudskillsboost.google/catalog_lab/5978) 
 
-## [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=naocMI4hyqE))
+## Youtube Explanation [Link](https://www.youtube.com/watch?v=naocMI4hyqE))
 
 ### Set Environment Variables ###
 ```
