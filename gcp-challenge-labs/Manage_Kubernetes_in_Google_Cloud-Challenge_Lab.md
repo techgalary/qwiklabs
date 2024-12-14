@@ -1,5 +1,7 @@
 # Manage Kubernetes in Google Cloud: Challenge Lab || [GSP510](https://www.cloudskillsboost.google/catalog_lab/5978) 
 
+## Solution Link [Here](https://www.youtube.com/watch?v=naocMI4hyqE)
+
 ### Set Environment Variables ###
 ```
 export REPO_NAME=demo-repo
