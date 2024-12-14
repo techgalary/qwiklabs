@@ -1,5 +1,6 @@
 ##  Use Machine Learning APIs on Google Cloud: Challenge Lab| [GSP329](https://www.cloudskillsboost.google/focuses/12704?parent=catalog)
 
+## Youtube [Link](https://youtu.be/ZKCWD0GZIZM)
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
