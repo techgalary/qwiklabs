@@ -1,6 +1,6 @@
 ## 🚀 Build a Website on Google Cloud: Challenge Lab | [GSP319](https://www.cloudskillsboost.google/focuses/11765?parent=catalog)
 
-
+## Youtube [Link](https://youtu.be/Xt2pCDagCM4)
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
  **Launch Cloud Shell:**  
