@@ -15,7 +15,7 @@ export PROJECT_ID=qwiklabs-gcp-00-ef90497ac793
 #### Set Configuration ####
 ```
 gcloud auth login
-gcloud config set project [PROJECT_ID]
+gcloud config set project $PROJECT_ID
 ```
 #### Enable API ####
 ```
