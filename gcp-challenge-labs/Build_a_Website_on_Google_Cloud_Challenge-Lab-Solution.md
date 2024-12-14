@@ -25,7 +25,8 @@ cd ~/monolith-to-microservices
 
 cd ~/monolith-to-microservices/monolith
 npm start
-
+```
+```
 gcloud services enable cloudbuild.googleapis.com
 gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$MONOLITH_IDENTIFIER:1.0.0 .
 
@@ -35,15 +36,18 @@ gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$MONOLITH_IDENTIFIER:1
 gcloud config set compute/zone us-central1-a
 gcloud services enable container.googleapis.com
 gcloud container clusters create $CLUSTER_NAME --num-nodes 3
-
+```
+```
 kubectl create deployment $MONOLITH_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$MONOLITH_IDENTIFIER:1.0.0
 kubectl expose deployment $MONOLITH_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8080
 ```
 ###  Task 3. Create new microservices ###
 ```bash
+
 cd ~/monolith-to-microservices/microservices/src/orders
 gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$ORDERS_IDENTIFIER:1.0.0 .
-
+```
+```
 cd ~/monolith-to-microservices/microservices/src/products
 gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$PRODUCTS_IDENTIFIER:1.0.0 .
 
@@ -52,7 +56,8 @@ gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$PRODUCTS_IDENTIFIER:1
 ```bash
 kubectl create deployment $ORDERS_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$ORDERS_IDENTIFIER:1.0.0
 kubectl expose deployment $ORDERS_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8081
-
+```
+```
 kubectl create deployment $PRODUCTS_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$PRODUCTS_IDENTIFIER:1.0.0
 kubectl expose deployment $PRODUCTS_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8082
 ```
@@ -65,7 +70,8 @@ nano .env
 
 REACT_APP_ORDERS_URL=http://34.132.73.105/api/orders
 REACT_APP_PRODUCTS_URL=http://34.170.169.147/api/products
-
+```
+```
 npm run build
 ```
 
