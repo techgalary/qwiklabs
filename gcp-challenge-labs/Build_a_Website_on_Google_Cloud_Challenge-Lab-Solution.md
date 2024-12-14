@@ -19,10 +19,12 @@ export FRONTEND_IDENTIFIER=
 ### Task 1. Download the monolith code and build your container ###
 ```bash
 git clone https://github.com/googlecodelabs/monolith-to-microservices.git
-
+```
+```
 cd ~/monolith-to-microservices
 ./setup.sh
-
+```
+```
 cd ~/monolith-to-microservices/monolith
 npm start
 ```
@@ -35,10 +37,14 @@ gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$MONOLITH_IDENTIFIER:1
 ```bash
 gcloud config set compute/zone us-central1-a
 gcloud services enable container.googleapis.com
+```
+```
 gcloud container clusters create $CLUSTER_NAME --num-nodes 3
 ```
 ```
 kubectl create deployment $MONOLITH_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$MONOLITH_IDENTIFIER:1.0.0
+```
+```
 kubectl expose deployment $MONOLITH_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8080
 ```
 ###  Task 3. Create new microservices ###
@@ -55,10 +61,14 @@ gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$PRODUCTS_IDENTIFIER:1
 ### Task 4. Deploy the new microservices ###
 ```bash
 kubectl create deployment $ORDERS_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$ORDERS_IDENTIFIER:1.0.0
+```
+```
 kubectl expose deployment $ORDERS_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8081
 ```
 ```
 kubectl create deployment $PRODUCTS_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$PRODUCTS_IDENTIFIER:1.0.0
+```
+```
 kubectl expose deployment $PRODUCTS_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8082
 ```
 
@@ -66,6 +76,8 @@ kubectl expose deployment $PRODUCTS_IDENTIFIER --type=LoadBalancer --port 80 --t
 
 ```bash
 cd ~/monolith-to-microservices/react-app
+```
+```
 nano .env
 
 REACT_APP_ORDERS_URL=http://34.132.73.105/api/orders
@@ -83,5 +95,7 @@ gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/$FRONTEND_IDENTIFIER:1
 ### Task 7. Deploy the Frontend microservice ###
 ```bash
 kubectl create deployment $FRONTEND_IDENTIFIER --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/$FRONTEND_IDENTIFIER:1.0.0
+```
+```
 kubectl expose deployment $FRONTEND_IDENTIFIER --type=LoadBalancer --port 80 --target-port 8080
 ```
