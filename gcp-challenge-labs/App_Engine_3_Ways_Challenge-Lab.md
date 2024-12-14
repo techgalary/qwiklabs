@@ -1,4 +1,4 @@
-## 🚀 Create and Manage AlloyDB Instances: Challenge Lab | [ARC112](https://www.cloudskillsboost.google/catalog_lab/6413)
+## 🚀 App Engine: 3 Ways: Challenge Lab| [ARC112](https://www.cloudskillsboost.google/catalog_lab/6413)
 
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
