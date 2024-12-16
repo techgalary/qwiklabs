@@ -6,13 +6,13 @@
 
 ### EXPORT ENV VARIABLES ###
 ```
-export CUSTOM_SECURIY_ROLE=
-export SERVICE_ACCOUNT=
-export CLUSTER_NAME=
+export CUSTOM_SECURIY_ROLE=orca_storage_editor_839
+export SERVICE_ACCOUNT=orca-private-cluster-117-sa
+export CLUSTER_NAME=orca-cluster-539
 export VPC_NAME=orca-build-vpc
 export SUBNET_NAME=orca-build-subnet
 export JUMPHOST_NAME=orca-jumphost
-export ZONE=us-east1-b
+export ZONE=europe-west1-c
 ```
 
 ### Task 1. Create a custom security role ###
