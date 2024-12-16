@@ -4,8 +4,7 @@
 
 ### Task 1. Prework - Set up environment, enable APIs and create clusters ###
 ```
-export PROJECT_ID=$(gcloud config get-value project)
-export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+export PROJECT_ID=qwiklabs-gcp-00-ca39aa9cecd3
 export REGION=us-central1
 gcloud config set compute/region $REGION
 gcloud config set project $PROJECT_ID
