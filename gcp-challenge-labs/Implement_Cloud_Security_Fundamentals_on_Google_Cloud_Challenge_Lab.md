@@ -60,7 +60,7 @@ gcloud container clusters create $CLUSTER_NAME --num-nodes 1 --master-ipv4-cidr=
 gcloud compute ssh --zone $ZONE $JUMPHOST_NAME
 ```
 ```
-gcloud config set compute/zone $ZONE
+gcloud config set compute/zone europe-west1-c
 ```
 ```
 gcloud container clusters get-credentials $CLUSTER_NAME --internal-ip
