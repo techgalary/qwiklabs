@@ -63,7 +63,7 @@ gcloud compute ssh --zone $ZONE $JUMPHOST_NAME
 gcloud config set compute/zone europe-west1-c
 ```
 ```
-gcloud container clusters get-credentials $CLUSTER_NAME --internal-ip
+gcloud container clusters get-credentials orca-cluster-539 --internal-ip
 ```
 ```
 sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
