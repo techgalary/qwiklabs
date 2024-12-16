@@ -6,7 +6,7 @@
 ```
 export PROJECT_ID=$(gcloud config get-value project)
 export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
-export REGION=
+export REGION=us-central1
 gcloud config set compute/region $REGION
 ```
 #### 2. Enable Service API's ####
