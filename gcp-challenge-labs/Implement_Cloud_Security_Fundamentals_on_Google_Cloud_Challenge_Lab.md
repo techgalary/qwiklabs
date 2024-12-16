@@ -5,7 +5,7 @@
 ## 🌐 **Guide to Complete the Challenge Lab**
 
 ### EXPORT ENV VARIABLES ###
-```
+```bash
 export CUSTOM_SECURIY_ROLE=orca_storage_editor_839
 export SERVICE_ACCOUNT=orca-private-cluster-117-sa
 export CLUSTER_NAME=orca-cluster-539
