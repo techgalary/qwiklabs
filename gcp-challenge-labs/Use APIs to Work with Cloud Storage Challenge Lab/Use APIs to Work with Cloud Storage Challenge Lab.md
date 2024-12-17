@@ -13,7 +13,7 @@ cat > bucket1.json <<EOF
 }
 EOF
 ```
-#### Use curl to call the JSON API to create the bucket1
+#### Use curl to call the JSON API to create the bucket1 ####
 ```
 curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" --data-binary @bucket1.json "https://storage.googleapis.com/storage/v1/b?project=$DEVSHELL_PROJECT_ID"
 ```
@@ -38,9 +38,9 @@ curl -LO https://raw.githubusercontent.com/techgalary/qwiklabs/tree/main/gcp-cha
 ```
 
 #### Use curl to call the JSON API that uploads the file to the bucket
-
+```
 curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: image/jpeg" --data-binary @world.jpeg "https://storage.googleapis.com/upload/storage/v1/b/$DEVSHELL_PROJECT_ID-bucket-1/o?uploadType=media&name=world.jpeg"
-
+```
 ### Task 3. Copy a file to another bucket
 ```
 curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" --data '{"destination": "$DEVSHELL_PROJECT_ID-bucket-2"}' "https://storage.googleapis.com/storage/v1/b/$DEVSHELL_PROJECT_ID-bucket-1/o/world.jpeg/copyTo/b/$DEVSHELL_PROJECT_ID-bucket-2/o/world.jpeg"
