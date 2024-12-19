@@ -1,6 +1,6 @@
 # Use APIs to Work with Cloud Storage: Challenge Lab || [ARC125](https://www.cloudskillsboost.google/focuses/65991?parent=catalog) ||
 
-## Solution [here]()
+## Solution [here](https://youtu.be/zqbE3OmnwIA)
 
 ### Task 1. Create two Cloud Storage buckets ###
 #### Create bucket1.json ####
