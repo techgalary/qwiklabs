@@ -172,7 +172,7 @@ gcloud beta deploy releases create web-app-002 \
 --build-artifacts web/artifacts.json \
 --source web/
 ```
-#### Verify the new version has been deployed to the staging environment ####
+### Task 7. Rollback The Change ###
 ```
 gcloud deploy targets rollback cd-staging \
    --delivery-pipeline=web-app \
