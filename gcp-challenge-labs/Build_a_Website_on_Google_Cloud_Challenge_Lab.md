@@ -6,9 +6,9 @@
 
 ### Export the Variables ###
 ```
-export ZONE=
+export ZONE=europe-west4-a
 export MON_IDENT=
-export CLUSTER=
+export CLUSTER=fancy-production-950
 export ORD_IDENT=
 export PROD_IDENT=
 export FRONT_IDENT=
