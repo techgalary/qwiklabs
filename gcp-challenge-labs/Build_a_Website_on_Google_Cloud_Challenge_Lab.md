@@ -7,11 +7,11 @@
 ### Export the Variables ###
 ```
 export ZONE=europe-west4-a
-export MON_IDENT=
+export MON_IDENT=fancy-monolith-117
 export CLUSTER=fancy-production-950
-export ORD_IDENT=
-export PROD_IDENT=
-export FRONT_IDENT=
+export ORD_IDENT=fancy-orders-930
+export PROD_IDENT=fancy-products-494
+export FRONT_IDENT=fancy-frontend-820
 ```
 ### Task 1. Download the monolith code and build your container ###
 ```
