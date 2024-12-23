@@ -2,7 +2,8 @@
 
 ### Guide to Complete the Lab ###
 
-### 1. Create a .view file name `order_items_challenge` and paste the following ###
+### Task 1. Create dimensions and measures & Task 2. Create a persistent derived table
+### Step 1. Create a .view file name `order_items_challenge` and paste the following code into the file ###
 
 ```
 view: order_items_challenge {
@@ -45,7 +46,7 @@ view: order_items_challenge {
 }
 ```
 
-### 2. Create again a .view file name `user_details` and paste the following ###
+### Step 2: Create the `user_details` View and paste the below code into the file ###
 
 ```
 view: user_details {
@@ -85,11 +86,8 @@ view: user_details {
 }
 ```
 
-### 3. Copy and paste the following in `training_ecommerce` model ###
-
-### 4. Replace `VALUE_1` from `Filter #1` price ###
-
- ### 5. Replace `VALUE_2` from `Filter #3` price ###
+### Task 3. Use Explore filters ###
+### 3. Copy and paste the following in `training_ecommerce` model and update the VALUE_1 and VALUE_2 ###
 
 ```
 connection: "bigquery_public_data_looker"
@@ -195,90 +193,20 @@ explore: events {
   }
 }
 ```
-6. Again Copy and paste the follwing in `training_ecommerce` model.
+#### Commit and Push the changes ####
 
-4. Add `NUM` in `hours`.
+### Step 4: Customize Datagroup for `order_items_challenge`
+#### 1. Add the following to the `training_ecommerce.model` file and update the NUM hours
 
-```
-connection: "bigquery_public_data_looker"
-
-# include all the views
-include: "/views/*.view"
-include: "/z_tests/*.lkml"
-include: "/**/*.dashboard"
-
+```looker
 datagroup: order_items_challenge_datagroup {
-  sql_trigger: SELECT MAX(order_item_id) from order_items ;;
+  sql_trigger: SELECT MAX(order_item_id) FROM order_items ;;
   max_cache_age: "NUM hours"
 }
 
-
 persist_with: order_items_challenge_datagroup
-
-
-label: "E-Commerce Training"
-
-explore: order_items {
-  join: user_details {
-
-    type: left_outer
-
-    sql_on: ${order_items.user_id} = ${user_details.user_id} ;;
-
-    relationship: many_to_one
-
-  }
-
-
-  join: order_items_challenge {
-    type: left_outer
-    sql_on: ${order_items.order_id} = ${order_items_challenge.order_id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${order_items.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-
-
-
-  join: inventory_items {
-    type: left_outer
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
-    relationship: many_to_one
-  }
-
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: events {
-  join: event_session_facts {
-    type: left_outer
-    sql_on: ${events.session_id} = ${event_session_facts.session_id} ;;
-    relationship: many_to_one
-  }
-  join: event_session_funnel {
-    type: left_outer
-    sql_on: ${events.session_id} = ${event_session_funnel.session_id} ;;
-    relationship: many_to_one
-  }
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 ```
+#### Commit and Push the changes ####
+
+
 
