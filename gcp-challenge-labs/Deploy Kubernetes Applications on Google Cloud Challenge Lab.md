@@ -9,6 +9,7 @@ export REPO=valkyrie-docker
 export DOCKER_IMAGE=valkyrie-app
 export TAG=v0.0.1
 export ZONE=us-central1-f
+export REGION=us-central1
 ```
 
 ### Task 1. Create a Docker image and store the Dockerfile ###
