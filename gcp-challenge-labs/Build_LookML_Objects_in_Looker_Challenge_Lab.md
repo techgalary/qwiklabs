@@ -3,18 +3,9 @@
 ### Guide to Complete the Lab ###
 
 ### Task 1. Create dimensions and measures & Task 2. Create a persistent derived table ###
-#### Step 1. Create a .view file name `order_items_challenge` and paste the following code into the file ####
+#### Step 1. Inside of the order_items view file paste the following code into the file ####
 
 ```
-view: order_items_challenge {
-  sql_table_name: `cloud-training-demos.looker_ecomm.order_items’  ;;
-  drill_fields: [order_item_id]
-  dimension: order_item_id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-
   dimension: is_search_source {
     type: yesno
     sql: ${users.traffic_source} = "Search" ;;
@@ -27,12 +18,10 @@ view: order_items_challenge {
     filters: [is_search_source: "Yes", order_items.status: "Complete"]
   }
 
-
   measure: total_gross_margin {
     type: sum
     sql: ${TABLE}.sale_price - ${inventory_items.cost} ;;
   }
-
 
   dimension: return_days {
     type: number
