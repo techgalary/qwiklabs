@@ -5,10 +5,10 @@
 ### Set the Variables 
 
 ```
-export REPO=
-export DOCKER_IMG=
-export TAG=
-export ZONE=
+export REPO=valkyrie-docker
+export DOCKER_IMG=valkyrie-app
+export TAG=v0.0.1
+export ZONE=us-central1-f
 ```
 
 ### Task 1. Create a Docker image and store the Dockerfile ###
