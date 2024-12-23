@@ -6,6 +6,15 @@
 #### Step 1. Inside of the order_items view file paste the following code into the file ####
 
 ```
+view: order_items_challenge {
+  sql_table_name: cloud-training-demos.looker_ecomm.order_items’  ;;
+  drill_fields: [order_item_id]
+  dimension: order_item_id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
   dimension: is_search_source {
     type: yesno
     sql: ${users.traffic_source} = "Search" ;;
