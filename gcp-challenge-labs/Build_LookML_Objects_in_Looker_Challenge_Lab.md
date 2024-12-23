@@ -2,8 +2,8 @@
 
 ### Guide to Complete the Lab ###
 
-### Task 1. Create dimensions and measures & Task 2. Create a persistent derived table
-### Step 1. Create a .view file name `order_items_challenge` and paste the following code into the file ###
+### Task 1. Create dimensions and measures & Task 2. Create a persistent derived table ###
+#### Step 1. Create a .view file name `order_items_challenge` and paste the following code into the file ####
 
 ```
 view: order_items_challenge {
@@ -46,7 +46,7 @@ view: order_items_challenge {
 }
 ```
 
-### Step 2: Create the `user_details` View and paste the below code into the file ###
+#### Step 2: Create the `user_details` View and paste the below code into the file ####
 
 ```
 view: user_details {
@@ -87,7 +87,7 @@ view: user_details {
 ```
 
 ### Task 3. Use Explore filters ###
-### 3. Copy and paste the following in `training_ecommerce` model and update the VALUE_1 and VALUE_2 ###
+#### 3. Copy and paste the following in `training_ecommerce` model and update the VALUE_1 and VALUE_2 ####
 
 ```
 connection: "bigquery_public_data_looker"
@@ -195,8 +195,8 @@ explore: events {
 ```
 #### Commit and Push the changes ####
 
-### Step 4: Customize Datagroup for `order_items_challenge`
-#### 1. Add the following to the `training_ecommerce.model` file and update the NUM hours
+### Step 4: Customize Datagroup for `order_items_challenge`###
+#### 1. Add the following to the `training_ecommerce.model` file and update the NUM hours ####
 
 ```looker
 datagroup: order_items_challenge_datagroup {
