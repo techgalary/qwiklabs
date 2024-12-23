@@ -27,12 +27,7 @@
     type: number
     sql: DATE_DIFF(${order_items.delivered_date}, ${order_items.returned_date}, DAY);;
   }
-  dimension: order_id {
-    type: number
-    sql: ${TABLE}.order_id ;;
-  }
 
-}
 ```
 
 #### Step 2: Create the `user_details` View and paste the below code into the file ####
