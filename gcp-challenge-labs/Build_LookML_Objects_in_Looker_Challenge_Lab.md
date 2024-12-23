@@ -48,9 +48,6 @@ view: order_items_challenge {
 ### 2. Create again a .view file name `user_details` and paste the following ###
 
 ```
-# If necessary, uncomment the line below to include explore_source.
-# include: "training_ecommerce.model.lkml"
-
 view: user_details {
   derived_table: {
     explore_source: order_items {
