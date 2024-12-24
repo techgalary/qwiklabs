@@ -76,16 +76,13 @@ sed -i "/targetId: test/d" clouddeploy-config/delivery-pipeline.yaml
 #### 2. Set the deployment region using the deploy/region configuration parameter ####
 ``` 
 gcloud config set deploy/region $REGION
-cp clouddeploy-config/delivery-pipeline.yaml.template clouddeploy-config/delivery-pipeline.yaml
-sed -i "s/targetId: staging/targetId: cd-staging/" clouddeploy-config/delivery-pipeline.yaml
-sed -i "s/targetId: prod/targetId: cd-production/" clouddeploy-config/delivery-pipeline.yaml
-sed -i "/targetId: test/d" clouddeploy-config/delivery-pipeline.yaml
+
 ```
-#### 3. Apply the pipeline configuration you created above using thef gcloud beta deploy command ####
+#### 3. Apply the pipeline configuration you created above using the gcloud beta deploy command ####
 ``` 
 gcloud beta deploy apply --file=clouddeploy-config/delivery-pipeline.yaml
 ```
-#### 4. Apply the pipeline configuration you created above using thef gcloud beta deploy command ####
+#### 4. Verify the deployment ####
 ``` 
 gcloud beta deploy delivery-pipelines describe web-app
 ```
@@ -145,6 +142,7 @@ gcloud beta deploy releases promote \
 --quiet
 
 ```
+#### Approve the deployment ####
 ``` 
 gcloud beta deploy rollouts approve web-app-001-to-cd-production-0001 \
 --delivery-pipeline web-app \
@@ -165,12 +163,18 @@ skaffold build --interactive=false \
 cd ..
 ```
 
-#### Create a new release on your pipeline you created earlier. Name the release web-app-002 ####
+#### Create a new release on the pipeline you created earlier. Name the release web-app-002 ####
 ```
 gcloud beta deploy releases create web-app-002 \
 --delivery-pipeline web-app \
 --build-artifacts web/artifacts.json \
 --source web/
+```
+#### Verify the new version has been deployed to the staging environment ####
+```
+gcloud beta deploy rollouts list \
+--delivery-pipeline web-app \
+--release web-app-002
 ```
 ### Task 7. Rollback The Change ###
 ```
