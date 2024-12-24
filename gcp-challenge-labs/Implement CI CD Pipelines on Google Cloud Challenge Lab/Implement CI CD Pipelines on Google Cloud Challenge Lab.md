@@ -1,6 +1,6 @@
 # Implement CI/CD Pipelines on Google Cloud: Challenge Lab || [GSP393](https://www.cloudskillsboost.google/focuses/52826?parent=catalog) ||
 
-## Solution [here]()
+## Solution [here](https://youtu.be/_e1Dmp2uemo)
 
 ### Task 1. Prework - Set up environment, enable APIs and create clusters ###
 ```
