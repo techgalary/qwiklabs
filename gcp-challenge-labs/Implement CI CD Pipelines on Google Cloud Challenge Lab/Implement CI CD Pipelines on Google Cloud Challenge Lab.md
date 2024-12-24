@@ -54,6 +54,8 @@ cd tutorials/base
 #### Create the skaffold.yaml configuration using the command below ####
 ```
 envsubst < clouddeploy-config/skaffold.yaml.template > web/skaffold.yaml
+```
+```
 cat web/skaffold.yaml
 ```
 #### Run the skaffold command to build the application and deploy the container image to the Artifact Registry repository previously created ####
