@@ -6,10 +6,10 @@
 
 #### Set the Environment Variables ####
 ```
-export CLUSTER_NAME=onlineboutique-cluster-349
-export POOL_NAME=optimized-pool-4885
-export max_replicas=10
-export ZONE=us-east4-b
+export CLUSTER_NAME=onlineboutique-cluster-431
+export POOL_NAME=optimized-pool-7111
+export max_replicas=11
+export ZONE=us-west1-a
 ```
 ### Task 1. Create a cluster and deploy your app ###
 ```
