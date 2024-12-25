@@ -52,6 +52,11 @@ gcloud container node-pools delete default-pool --cluster=$CLUSTER_NAME --projec
 ```
 kubectl create poddisruptionbudget onlineboutique-frontend-pdb --selector app=frontend --min-available 1 --namespace dev
 ```
+
+#### Verify it ####
+```
+kubectl get poddisruptionbudget onlineboutique-frontend-pdb -n dev
+```
 ```
 kubectl patch deployment frontend -n dev --type=json -p '[
   {
@@ -67,6 +72,12 @@ kubectl patch deployment frontend -n dev --type=json -p '[
 ]'
 
 ```
+
+#### Verify it ####
+```
+kubectl describe deployment frontend -n dev
+```
+
 ### Task 4. Autoscale from estimated traffic ###
 ```
 kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=$MAX_REPLICAS --namespace dev
