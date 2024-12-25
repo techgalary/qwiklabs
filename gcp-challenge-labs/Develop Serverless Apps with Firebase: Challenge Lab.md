@@ -88,5 +88,6 @@ gcloud beta run deploy $FRNT_STG_SRV --image gcr.io/$GOOGLE_CLOUD_PROJECT/fronte
 ```
 gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-production:0.1
 ```
+```
 gcloud beta run deploy $FRNT_PRD_SRV --image gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-production:0.1 --region=$REGION --quiet
 ```
