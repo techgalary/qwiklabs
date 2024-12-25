@@ -80,7 +80,7 @@ kubectl describe deployment frontend -n dev
 
 ### Task 4. Autoscale from estimated traffic ###
 ```
-kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=$MAX_REPLICAS --namespace dev
+kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=$max_replicas --namespace dev
 ```
 ```
 kubectl get hpa --namespace dev
