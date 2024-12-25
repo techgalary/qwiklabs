@@ -8,16 +8,18 @@
 export METRIC=
 export VALUE=
 ```
+```
 gcloud services enable monitoring.googleapis.com
-
+```
+```
 export ZONE=$(gcloud compute instances list video-queue-monitor --format 'csv[no-heading](zone)')
-
 export REGION="${ZONE%-*}"
-
 export INSTANCE_ID=$(gcloud compute instances describe video-queue-monitor --project="$DEVSHELL_PROJECT_ID" --zone="$ZONE" --format="get(id)")
-
+```
+```
 gcloud compute instances stop video-queue-monitor --zone $ZONE
-
+```
+```
 cat > startup-script.sh <<EOF_START
 #!/bin/bash
 
@@ -68,17 +70,22 @@ go mod init go/video/main
 go mod tidy
 go run /work/go/video/main.go
 EOF_START
+```
+```
 
 gcloud compute instances add-metadata video-queue-monitor \
   --zone $ZONE \
   --metadata-from-file startup-script=startup-script.sh
-
+```
+```
 gcloud compute instances start video-queue-monitor --zone $ZONE
-
+```
+```
 gcloud logging metrics create $METRIC \
     --description="Metric for high resolution video uploads" \
     --log-filter='textPayload=("file_format=4K" OR "file_format=8K")'
-
+```
+```
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
@@ -89,12 +96,15 @@ cat > email-channel.json <<EOF_END
   }
 }
 EOF_END
-
+```
+```
 gcloud beta monitoring channels create --channel-content-from-file="email-channel.json"
-
+```
+```
 email_channel_info=$(gcloud beta monitoring channels list)
 email_channel_id=$(echo "$email_channel_info" | grep -oP 'name: \K[^ ]+' | head -n 1)
-
+```
+```
 cat > quickgcplab.json <<EOF_END
 {
   "displayName": "quickgcplab",
@@ -133,6 +143,9 @@ cat > quickgcplab.json <<EOF_END
   "severity": "SEVERITY_UNSPECIFIED"
 }
 EOF_END
+```
 
 # Create the alert policy
+```
 gcloud alpha monitoring policies create --policy-from-file=quickgcplab.json
+```
