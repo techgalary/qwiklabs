@@ -4,10 +4,10 @@
 
 ### Set Variables
 ```
-export INSTANCE=nucleus-jumphost-527
-export FIREWALL=grant-tcp-rule-789
-export ZONE=us-west1-c
-export REGION=us-west1
+export INSTANCE=nucleus-jumphost-634
+export FIREWALL=permit-tcp-rule-648
+export ZONE=europe-west4-c
+export REGION=europe-west4
 ```
 ### Task 1. Create a project jumphost instance ###
 ```
