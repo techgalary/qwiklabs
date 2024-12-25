@@ -10,10 +10,11 @@ export CLUSTER_NAME=onlineboutique-cluster-431
 export POOL_NAME=optimized-pool-7111
 export max_replicas=11
 export ZONE=us-west1-a
+export PROJECT_ID=qwiklabs-gcp-03-7eb98bdb1e99
 ```
 ### Task 1. Create a cluster and deploy your app ###
 ```
-gcloud container clusters create $CLUSTER_NAME --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --machine-type=e2-standard-2 --num-nodes=2
+gcloud container clusters create $CLUSTER_NAME --project=$PROJECT_ID --zone=$ZONE --machine-type=e2-standard-2 --num-nodes=2
 ```
 #### Create Namespace ####
 ```
@@ -44,7 +45,7 @@ kubectl get pods -o=wide --namespace=dev
 ```
 #### Delete the default node pool ####
 ```
-gcloud container node-pools delete default-pool --cluster=$CLUSTER_NAME --project=$DEVSHELL_PROJECT_ID --zone $ZONE --quiet
+gcloud container node-pools delete default-pool --cluster=$CLUSTER_NAME --project=$PROJECT_ID --zone $ZONE --quiet
 ```
 
 ### Task 3. Apply a frontend update ###
@@ -74,5 +75,5 @@ kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=$MAX_REPLIC
 kubectl get hpa --namespace dev
 ```
 ```
-gcloud beta container clusters update $CLUSTER_NAME --zone=$ZONE --project=$DEVSHELL_PROJECT_ID --enable-autoscaling --min-nodes 1 --max-nodes 6
+gcloud beta container clusters update $CLUSTER_NAME --zone=$ZONE --project=$PROJECT_ID --enable-autoscaling --min-nodes 1 --max-nodes 6
 ```
