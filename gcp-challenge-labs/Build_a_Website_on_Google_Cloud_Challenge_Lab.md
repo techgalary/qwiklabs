@@ -1,6 +1,6 @@
 ## 🚀 Build a Website on Google Cloud: Challenge Lab | [GSP319](https://www.cloudskillsboost.google/catalog_lab/2692)
 
-## Youtube [link](https://youtu.be/Xt2pCDagCM4)
+## Youtube [link](https://youtu.be/9tt7r1OSfq8)
 
 ## 🌐 **Guide to Complete the Challenge Lab:**
 
@@ -79,7 +79,6 @@ kubectl expose deployment $PROD_IDENT --type=LoadBalancer --port 80 --target-por
 ```
 ### Task 5. Configure and deploy the Frontend microservice ###
 ```
-cd ~/monolith-to-microservices/react-app
 cd ~/monolith-to-microservices/microservices/src/frontend
 ```
 
