@@ -1,6 +1,6 @@
 # Deploy Kubernetes Applications on Google Cloud: Challenge Lab || [GSP318](https://www.cloudskillsboost.google/focuses/10457?parent=catalog) ||
 
-## Youtube Solution [here]()
+## Youtube Solution [here](https://youtu.be/11O5xdOb1es)
 
 ### Set the Variables 
 
