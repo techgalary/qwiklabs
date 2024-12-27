@@ -1,6 +1,6 @@
 ## Optimize Costs for Google Kubernetes Engine: Challenge Lab | [GSP343](https://www.cloudskillsboost.google/focuses/16327?parent=catalog)
 
-## Youtube link [Here]()
+## Youtube link [Here](https://youtu.be/x_1-3OM2fr8)
 
 ## 🌐 **Guide to Complete the Challenge Lab**
 
