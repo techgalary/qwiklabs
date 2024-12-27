@@ -1,6 +1,6 @@
 # Implement Load Balancing on Compute Engine: Challenge Lab || [GSP313](https://www.cloudskillsboost.google/focuses/10258?parent=catalog) ||
 
-## Solution [here]()
+## Solution [here](https://youtu.be/8JjC9tv2T-w)
 
 ### Set Variables
 ```
