@@ -4,14 +4,14 @@
 
 ### Set Variables ###
 ```
-export BUCKET=
-export INSTANCE=
-export VPC=
-export PROJECT_ID=
-export ZONE=
-export REGION=
-export INSTANCE_ID_1=
-export INSTANCE_ID_2=
+export BUCKET=tf-bucket-439943
+export INSTANCE=tf-instance-584651
+export VPC=tf-vpc-475870
+export PROJECT_ID=qwiklabs-gcp-00-8bc8b8d46db8
+export ZONE=us-central1-f
+export REGION=us-central1
+export INSTANCE_ID_1=tf-instance-1 
+export INSTANCE_ID_2=tf-instance-2
 ```
 ### Task 1. Create the configuration files ###
 
