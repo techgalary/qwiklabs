@@ -14,6 +14,7 @@ export INSTANCE_ID_1=
 export INSTANCE_ID_2=
 ```
 ### Task 1. Create the configuration files ###
+
 #### Create .tf and other folders ####
 ```
 touch main.tf variables.tf
@@ -69,6 +70,8 @@ EOF_END
 ```
 terraform init
 ```
+### Task 2. Import infrastructure ###
+
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -125,6 +128,8 @@ terraform plan
 ```
 terraform apply -auto-approve
 ```
+
+### Task 3. Configure a remote backend ###
 ```
 cat > modules/storage/storage.tf <<EOF_END
 resource "google_storage_bucket" "storage-bucket" {
@@ -148,6 +153,7 @@ terraform init
 ```
 terraform apply -auto-approve
 ```
+
 ```
 cat > main.tf <<EOF_END
 terraform {
@@ -181,6 +187,7 @@ EOF_END
 ```
 terraform init
 ```
+### Task 4. Modify and update infrastructure ###
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -250,6 +257,8 @@ terraform init
 ```
 terraform apply -auto-approve
 ```
+
+
 ```
 terraform taint module.instances.google_compute_instance.$INSTANCE
 ```
@@ -308,6 +317,8 @@ EOF_END
 ```
 terraform apply -auto-approve
 ```
+
+### Task 6. Use a module from the Registry ###
 ```
 cat >> main.tf <<EOF_END
 module "vpc" {
@@ -345,6 +356,7 @@ terraform plan
 ```
 terraform apply -auto-approve
 ```
+### Task 5. Destroy resources ###
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -399,6 +411,7 @@ terraform plan
 ```
 terraform apply -auto-approve
 ```
+### Task 7. Configure a firewall ###
 ```
 cat >> main.tf <<EOF_END
 resource "google_compute_firewall" "tf-firewall"{
