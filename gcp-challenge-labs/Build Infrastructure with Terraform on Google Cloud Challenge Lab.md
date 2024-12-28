@@ -45,6 +45,7 @@ variable "project_id" {
 }
 EOF_END
 ```
+#### add terraform block to main.tf file ####
 ```
 cat > main.tf <<EOF_END
 terraform {
@@ -72,6 +73,7 @@ terraform init
 ```
 ### Task 2. Import infrastructure ###
 
+#### Import the existing instances into the instances module. ####
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -130,6 +132,7 @@ terraform apply -auto-approve
 ```
 
 ### Task 3. Configure a remote backend ###
+#### Create a Cloud Storage bucket resource inside the storage module ####
 ```
 cat > modules/storage/storage.tf <<EOF_END
 resource "google_storage_bucket" "storage-bucket" {
@@ -140,6 +143,8 @@ resource "google_storage_bucket" "storage-bucket" {
 }
 EOF_END
 ```
+
+#### Add the module reference to the main.tf file. ####
 ```
 cat >> main.tf <<EOF_END
 module "storage" {
@@ -153,7 +158,7 @@ terraform init
 ```
 terraform apply -auto-approve
 ```
-
+#### Configure this storage bucket as the remote backend inside the main.tf ####
 ```
 cat > main.tf <<EOF_END
 terraform {
@@ -188,6 +193,8 @@ EOF_END
 terraform init
 ```
 ### Task 4. Modify and update infrastructure ###
+
+#### modify the machine type of instances and create additional instance ####
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -258,19 +265,7 @@ terraform init
 terraform apply -auto-approve
 ```
 
-
-```
-terraform taint module.instances.google_compute_instance.$INSTANCE
-```
-```
-terraform init
-```
-```
-terraform plan
-```
-```
-terraform apply -auto-approve
-```
+### Task 5. Destroy resources ###
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
@@ -319,6 +314,8 @@ terraform apply -auto-approve
 ```
 
 ### Task 6. Use a module from the Registry ###
+
+#### Create VPC and subnets ####
 ```
 cat >> main.tf <<EOF_END
 module "vpc" {
@@ -356,7 +353,7 @@ terraform plan
 ```
 terraform apply -auto-approve
 ```
-
+#### update the configuration resources to connect tf-instance-1 to subnet-01 and tf-instance-2 to subnet-02 ####
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
