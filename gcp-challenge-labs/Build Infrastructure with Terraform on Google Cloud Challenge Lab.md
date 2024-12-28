@@ -356,7 +356,7 @@ terraform plan
 ```
 terraform apply -auto-approve
 ```
-### Task 5. Destroy resources ###
+### Task 6. Use a module from the Registry ###
 ```
 cat > modules/instances/instances.tf <<EOF_END
 resource "google_compute_instance" "tf-instance-1" {
