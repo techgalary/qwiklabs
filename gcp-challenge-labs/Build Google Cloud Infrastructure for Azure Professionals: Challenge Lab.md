@@ -1,4 +1,6 @@
-## [Build Google Cloud Infrastructure for Azure Professionals: Challenge Lab - GSP512](https://cloudskillsboost.google/focuses/60393?parent=catalog)
+# Build Google Cloud Infrastructure for Azure Professionals: Challenge Lab || [GSP512](https://cloudskillsboost.google/focuses/60393?parent=catalog) ||
+
+## Youtube Solution [here]()
 ```
 gcloud auth list
 ```
