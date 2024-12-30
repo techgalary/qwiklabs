@@ -9,29 +9,22 @@ gcloud config set compute/zone $ZONE
 export REGION=${ZONE%-*}
 gcloud config set compute/region $REGION
 ```
+### Task 1. Create development VPC manually ###
 ```
 gcloud compute networks create griffin-dev-vpc --project=$DEVSHELL_PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-dev-wp --project=$DEVSHELL_PROJECT_ID --region=$REGION --range=192.168.16.0/20 --network=griffin-dev-vpc && gcloud compute networks subnets create griffin-dev-mgmt --project=$DEVSHELL_PROJECT_ID --region=$REGION --network=griffin-dev-vpc --range=192.168.32.0/20
 ```
-```
 
-gsutil cp -r gs://cloud-training/gsp321/dm .
+### Task 2. Create production VPC manually ###
 ```
+gcloud compute networks create griffin-prod-vpc --project=$DEVSHELL_PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-prod-wp --project=$DEVSHELL_PROJECT_ID --region=$REGION --range=192.168.48.0/20 --network=griffin-prod-vpc && gcloud compute networks subnets create griffin-prod-mgmt --project=$DEVSHELL_PROJECT_ID --region=$REGION --network=griffin-prod-vpc --range=192.168.64.0/20
 ```
-cd dm
-
-sed -i s/SET_REGION/$REGION/g prod-network.yaml
-```
-```
-gcloud deployment-manager deployments create prod-network \
-    --config=prod-network.yaml
-cd ..
-
-```
+### Task 3. Create bastion host ###
 ```
 gcloud compute instances create bastion --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --network-interface=network=griffin-dev-vpc,subnet=griffin-dev-mgmt --network-interface=network=griffin-prod-vpc,subnet=griffin-prod-mgmt --tags=ssh && gcloud compute firewall-rules create fw-ssh-dev --project=$DEVSHELL_PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-dev-vpc --source-ranges=0.0.0.0/0 && gcloud compute firewall-rules create fw-ssh-prod --project=$DEVSHELL_PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-prod-vpc --source-ranges=0.0.0.0/0
 ```
-```
 
+### Task 4. Create and configure Cloud SQL Instance ###
+```
 gcloud sql instances create griffin-dev-db --project=$DEVSHELL_PROJECT_ID  --region=$REGION --database-version=MYSQL_5_7 --root-password="techcps"
 ```
 ```
@@ -41,9 +34,12 @@ gcloud sql databases create wordpress --instance=griffin-dev-db --project=$DEVSH
 gcloud sql users create wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users set-password wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users list --instance=griffin-dev-db --instance=griffin-dev-db --format="value(name)" --filter="host='%'"
 
 ```
+### Task 5. Create Kubernetes cluster ###
 ```
 gcloud container clusters create griffin-dev --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --machine-type e2-standard-4 --network griffin-dev-vpc --subnetwork griffin-dev-wp --num-nodes 2 && gcloud container clusters get-credentials griffin-dev --project=$DEVSHELL_PROJECT_ID --zone=$ZONE
 ```
+
+### Task 6. Prepare the Kubernetes cluster ###
 ```
 cd ~/
 gsutil cp -r gs://cloud-training/gsp321/wp-k8s .
@@ -90,6 +86,7 @@ kubectl create secret generic cloudsql-instance-credentials \
 INSTANCE_ID=$(gcloud sql instances describe griffin-dev-db --project=$DEVSHELL_PROJECT_ID --format='value(connectionName)')
 
 ```
+### Task 7. Create a WordPress deployment ###
 ```
 cat > wp-deployment.yaml <<EOF_CP
 apiVersion: apps/v1
@@ -158,33 +155,7 @@ EOF_CP
 kubectl create -f wp-deployment.yaml
 kubectl create -f wp-service.yaml
 ```
-```
-IAM_POLICY_JSON=$(gcloud projects get-iam-policy $DEVSHELL_PROJECT_ID --format=json)
-```
-```
-USERS=$(echo $IAM_POLICY_JSON | jq -r '.bindings[] | select(.role == "roles/viewer").members[]')
-```
-```
-for USER in $USERS; do
-  if [[ $USER == *"user:"* ]]; then
-    USER_EMAIL=$(echo $USER | cut -d':' -f2)
-    gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-      --member=user:$USER_EMAIL \
-      --role=roles/editor
-  fi
-done
-```
-```
-EXTERNAL_IP=$(kubectl get services wordpress -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
-```
-```
-cat > terraform.tfvars <<EOF_CP
-devsell_project_id = "$DEVSHELL_PROJECT_ID"
-external_ip        = "$EXTERNAL_IP"
-
-EOF_CP
-
-```
+### Task 8. Enable monitoring ###
 ```
 cat > techcps.tf << "EOF_CP"
 variable "devsell_project_id" {
@@ -225,3 +196,5 @@ EOF_CP
 terraform init
 terraform apply --auto-approve
 ```
+### Task 9. Provide access for an additional engineer ###
+#### Check the video for this step completion ####
