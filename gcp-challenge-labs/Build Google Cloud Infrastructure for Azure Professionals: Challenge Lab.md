@@ -27,7 +27,7 @@ gcloud compute instances create bastion --project=$PROJECT_ID --zone=$ZONE --net
 
 ### Task 4. Create and configure Cloud SQL Instance ###
 ```
-gcloud sql instances create griffin-dev-db --project=$PROJECT_ID  --region=$REGION --database-version=MYSQL_5_7 --root-password="techcps"
+gcloud sql instances create griffin-dev-db --project=$PROJECT_ID  --region=$REGION --database-version=MYSQL_5_7 --root-password="techgalary"
 ```
 ```
 gcloud sql databases create wordpress --instance=griffin-dev-db --project=$PROJECT_ID
@@ -159,7 +159,7 @@ kubectl create -f wp-service.yaml
 ```
 ### Task 8. Enable monitoring ###
 ```
-cat > techcps.tf << "EOF_CP"
+cat > techgalary.tf << "EOF_CP"
 variable "devsell_project_id" {
   description = "The project ID"
 }
@@ -173,7 +173,7 @@ provider "google" {
 }
 
 resource "google_monitoring_uptime_check_config" "example" {
-  display_name = "techcps"
+  display_name = "techgalary"
   timeout      = "60s"
 
   http_check {
