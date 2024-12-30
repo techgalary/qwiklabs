@@ -185,7 +185,7 @@ resource "google_monitoring_uptime_check_config" "example" {
     type = "uptime_url"
     labels = {
       project_id = var.devshell_project_id
-      host       = var.34.73.117.83  # Replace with your external IP
+      host       = 34.73.117.83  # Replace with your external IP
     }
   }
 
