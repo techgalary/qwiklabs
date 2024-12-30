@@ -33,7 +33,7 @@ gcloud sql instances create griffin-dev-db --project=$PROJECT_ID  --region=$REGI
 gcloud sql databases create wordpress --instance=griffin-dev-db --project=$PROJECT_ID
 ```
 ```
-gcloud sql users create wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users set-password wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users list --instance=griffin-dev-db --instance=griffin-dev-db --format="value(name)" --filter="host='%'"
+gcloud sql users create wp_user --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users set-password wp_user --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users list --instance=griffin-dev-db --format="value(name)" --filter="host='%'"
 
 ```
 ### Task 5. Create Kubernetes cluster ###
