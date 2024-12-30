@@ -5,11 +5,11 @@
 gcloud auth list
 ```
 ```
-export PROJECT_ID=$(gcloud config get-value project)
-export PROJECT_ID=$DEVSHELL_PROJECT_ID
+export PROJECT_ID=qwiklabs-gcp-00-da534d915177
+export ZONE=us-east1-d
+export REGION=us-east1
 gcloud config set compute/zone $ZONE
-export REGION=${ZONE%-*}
-gcloud config set compute/region $REGION
+
 ```
 ### Task 1. Create development VPC manually ###
 ```
