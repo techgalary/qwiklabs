@@ -13,24 +13,24 @@ gcloud config set compute/zone $ZONE
 ```
 ### Task 1. Create development VPC manually ###
 ```
-gcloud compute networks create griffin-dev-vpc --project=$DEVSHELL_PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-dev-wp --project=$DEVSHELL_PROJECT_ID --region=$REGION --range=192.168.16.0/20 --network=griffin-dev-vpc && gcloud compute networks subnets create griffin-dev-mgmt --project=$DEVSHELL_PROJECT_ID --region=$REGION --network=griffin-dev-vpc --range=192.168.32.0/20
+gcloud compute networks create griffin-dev-vpc --project=$PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-dev-wp --project=$PROJECT_ID --region=$REGION --range=192.168.16.0/20 --network=griffin-dev-vpc && gcloud compute networks subnets create griffin-dev-mgmt --project=$PROJECT_ID --region=$REGION --network=griffin-dev-vpc --range=192.168.32.0/20
 ```
 
 ### Task 2. Create production VPC manually ###
 ```
-gcloud compute networks create griffin-prod-vpc --project=$DEVSHELL_PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-prod-wp --project=$DEVSHELL_PROJECT_ID --region=$REGION --range=192.168.48.0/20 --network=griffin-prod-vpc && gcloud compute networks subnets create griffin-prod-mgmt --project=$DEVSHELL_PROJECT_ID --region=$REGION --network=griffin-prod-vpc --range=192.168.64.0/20
+gcloud compute networks create griffin-prod-vpc --project=$PROJECT_ID --subnet-mode custom && gcloud compute networks subnets create griffin-prod-wp --project=$PROJECT_ID --region=$REGION --range=192.168.48.0/20 --network=griffin-prod-vpc && gcloud compute networks subnets create griffin-prod-mgmt --project=$PROJECT_ID --region=$REGION --network=griffin-prod-vpc --range=192.168.64.0/20
 ```
 ### Task 3. Create bastion host ###
 ```
-gcloud compute instances create bastion --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --network-interface=network=griffin-dev-vpc,subnet=griffin-dev-mgmt --network-interface=network=griffin-prod-vpc,subnet=griffin-prod-mgmt --tags=ssh && gcloud compute firewall-rules create fw-ssh-dev --project=$DEVSHELL_PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-dev-vpc --source-ranges=0.0.0.0/0 && gcloud compute firewall-rules create fw-ssh-prod --project=$DEVSHELL_PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-prod-vpc --source-ranges=0.0.0.0/0
+gcloud compute instances create bastion --project=$PROJECT_ID --zone=$ZONE --network-interface=network=griffin-dev-vpc,subnet=griffin-dev-mgmt --network-interface=network=griffin-prod-vpc,subnet=griffin-prod-mgmt --tags=ssh && gcloud compute firewall-rules create fw-ssh-dev --project=$PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-dev-vpc --source-ranges=0.0.0.0/0 && gcloud compute firewall-rules create fw-ssh-prod --project=$PROJECT_ID --target-tags ssh --allow=tcp:22 --network=griffin-prod-vpc --source-ranges=0.0.0.0/0
 ```
 
 ### Task 4. Create and configure Cloud SQL Instance ###
 ```
-gcloud sql instances create griffin-dev-db --project=$DEVSHELL_PROJECT_ID  --region=$REGION --database-version=MYSQL_5_7 --root-password="techcps"
+gcloud sql instances create griffin-dev-db --project=$PROJECT_ID  --region=$REGION --database-version=MYSQL_5_7 --root-password="techcps"
 ```
 ```
-gcloud sql databases create wordpress --instance=griffin-dev-db --project=$DEVSHELL_PROJECT_ID
+gcloud sql databases create wordpress --instance=griffin-dev-db --project=$PROJECT_ID
 ```
 ```
 gcloud sql users create wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users set-password wp_user --instance=griffin-dev-db --instance=griffin-dev-db --password=stormwind_rules && gcloud sql users list --instance=griffin-dev-db --instance=griffin-dev-db --format="value(name)" --filter="host='%'"
@@ -38,7 +38,7 @@ gcloud sql users create wp_user --instance=griffin-dev-db --instance=griffin-dev
 ```
 ### Task 5. Create Kubernetes cluster ###
 ```
-gcloud container clusters create griffin-dev --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --machine-type e2-standard-4 --network griffin-dev-vpc --subnetwork griffin-dev-wp --num-nodes 2 && gcloud container clusters get-credentials griffin-dev --project=$DEVSHELL_PROJECT_ID --zone=$ZONE
+gcloud container clusters create griffin-dev --project=$PROJECT_ID --zone=$ZONE --machine-type e2-standard-4 --network griffin-dev-vpc --subnetwork griffin-dev-wp --num-nodes 2 && gcloud container clusters get-credentials griffin-dev --project=$PROJECT_ID --zone=$ZONE
 ```
 
 ### Task 6. Prepare the Kubernetes cluster ###
@@ -85,7 +85,7 @@ kubectl create secret generic cloudsql-instance-credentials \
     --from-file key.json
 ```
 ```
-INSTANCE_ID=$(gcloud sql instances describe griffin-dev-db --project=$DEVSHELL_PROJECT_ID --format='value(connectionName)')
+INSTANCE_ID=$(gcloud sql instances describe griffin-dev-db --project=$PROJECT_ID --format='value(connectionName)')
 
 ```
 ### Task 7. Create a WordPress deployment ###
