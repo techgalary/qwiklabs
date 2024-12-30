@@ -160,7 +160,7 @@ kubectl create -f wp-service.yaml
 ### Task 8. Enable monitoring ###
 ```
 cat > techgalary.tf << "EOF_CP"
-variable "devsell_project_id" {
+variable "devshell_project_id" {
   description = "The project ID"
 }
 
@@ -169,7 +169,7 @@ variable "external_ip" {
 }
 
 provider "google" {
-  project = var.devsell_project_id
+  project = var.devshell_project_id
 }
 
 resource "google_monitoring_uptime_check_config" "example" {
@@ -184,8 +184,8 @@ resource "google_monitoring_uptime_check_config" "example" {
   monitored_resource {
     type = "uptime_url"
     labels = {
-      project_id = var.devsell_project_id
-      host       = var.external_ip  # Replace with your external IP
+      project_id = var.devshell_project_id
+      host       = var.34.73.117.83  # Replace with your external IP
     }
   }
 
