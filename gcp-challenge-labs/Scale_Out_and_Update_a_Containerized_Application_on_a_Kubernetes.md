@@ -36,10 +36,6 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE
 kubectl set image deployment/echo-web echo-app=gcr.io/$PROJECT_ID/echo-app:v2
 
 ```
-#### Expose the deployment ####
-```
-kubectl expose deployment echo-web --type=LoadBalancer --port=80 --target-port=80
-```
 ### Task 4. Scale out the application ###
 ```
 kubectl scale deployment echo-web --replicas=2
