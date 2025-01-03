@@ -1,7 +1,7 @@
 
 # Scale Out and Update a Containerized Application on a Kubernetes Cluster: Challenge Lab || [GSP305](https://www.cloudskillsboost.google/focuses/1739?parent=catalog) ||
 
-## Solution [here]()
+## Solution [here](https://youtu.be/VHD75dXGk5w)
 ### Set Env Variables ###
 ``` bash
 export ZONE=us-east4-b
