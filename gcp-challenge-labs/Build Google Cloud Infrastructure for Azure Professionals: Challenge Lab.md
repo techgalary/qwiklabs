@@ -5,9 +5,9 @@
 gcloud auth list
 ```
 ```
-export PROJECT_ID=qwiklabs-gcp-00-da534d915177
-export ZONE=us-east1-d
-export REGION=us-east1
+export PROJECT_ID=qwiklabs-gcp-02-7e158c1ffd28
+export ZONE=us-east4-a
+export REGION=us-east4
 gcloud config set compute/zone $ZONE
 
 ```
