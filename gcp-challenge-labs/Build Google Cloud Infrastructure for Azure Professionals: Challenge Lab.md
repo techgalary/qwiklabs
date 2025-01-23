@@ -164,7 +164,7 @@ EXTERNAL_IP=$(kubectl get services wordpress -o=jsonpath='{.status.loadBalancer.
 ```
 ```
 cat > terraform.tfvars <<EOF_CP
-devsell_project_id = "$DEVSHELL_PROJECT_ID"
+devshell_project_id = "$DEVSHELL_PROJECT_ID"
 external_ip        = "$EXTERNAL_IP"
 
 EOF_CP
