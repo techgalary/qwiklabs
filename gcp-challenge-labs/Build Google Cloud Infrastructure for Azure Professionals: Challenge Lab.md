@@ -158,6 +158,17 @@ kubectl create -f wp-deployment.yaml
 kubectl create -f wp-service.yaml
 ```
 ### Task 8. Enable monitoring ###
+
+```
+EXTERNAL_IP=$(kubectl get services wordpress -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
+```
+```
+cat > terraform.tfvars <<EOF_CP
+devsell_project_id = "$DEVSHELL_PROJECT_ID"
+external_ip        = "$EXTERNAL_IP"
+
+EOF_CP
+```
 ```
 cat > techgalary.tf << "EOF_CP"
 variable "devshell_project_id" {
@@ -185,7 +196,7 @@ resource "google_monitoring_uptime_check_config" "example" {
     type = "uptime_url"
     labels = {
       project_id = var.devshell_project_id
-      host       = 34.73.117.83  # Replace with your external IP
+      host       = var.external_ip
     }
   }
 
@@ -199,4 +210,17 @@ terraform init
 terraform apply --auto-approve
 ```
 ### Task 9. Provide access for an additional engineer ###
-#### Check the video for this step completion ####
+```
+IAM_POLICY_JSON=$(gcloud projects get-iam-policy $DEVSHELL_PROJECT_ID --format=json)
+USERS=$(echo $IAM_POLICY_JSON | jq -r '.bindings[] | select(.role == "roles/viewer").members[]')
+```
+```
+for USER in $USERS; do
+  if [[ $USER == *"user:"* ]]; then
+    USER_EMAIL=$(echo $USER | cut -d':' -f2)
+    gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
+      --member=user:$USER_EMAIL \
+      --role=roles/editor
+  fi
+done
+```
