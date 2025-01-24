@@ -1,6 +1,8 @@
 # Build Google Cloud Infrastructure for Azure Professionals: Challenge Lab || [GSP512](https://cloudskillsboost.google/focuses/60393?parent=catalog) ||
 
-## Youtube Solution [here]()
+## Youtube Solution [here](https://youtu.be/MHh2ZFyEu5g)
+
+### NOTE: Ensure you update the Project ID, Zone, Region as per your lab ###
 ```
 gcloud auth list
 ```
