@@ -5,7 +5,7 @@
 #### Set Environment Variables ####
 
 ```
-export ZONE=
+export ZONE=us-east-1-a
 ```
 ### Task 1. Deploy a GKE cluster ###
 ```
