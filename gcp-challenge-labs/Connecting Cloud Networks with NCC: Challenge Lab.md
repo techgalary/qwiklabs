@@ -6,7 +6,7 @@
 
 #### Set up environment variables
 ```
-export REGION=us-central1
+export REGION=us-east1
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud config set compute/region $REGION
 ```
@@ -36,7 +36,7 @@ gcloud network-connectivity hubs create routing-hub \
 ##### On-Prem Office 1
 
 ```
-gcloud network-connectivity spokes create spoke-office-1 \
+gcloud alpha network-connectivity spokes create spoke-office-1 \
     --hub=routing-hub \
     --region=$REGION \
     --vpn-tunnel=vpn-office1-tunnel1,vpn-office1-tunnel2 \
@@ -45,7 +45,7 @@ gcloud network-connectivity spokes create spoke-office-1 \
 ```
 ##### On-Prem Office 2
 ```
-gcloud network-connectivity spokes create spoke-office-2 \
+gcloud alpha network-connectivity spokes create spoke-office-2 \
     --hub=routing-hub \
     --region=$REGION \
     --vpn-tunnel=vpn-office2-tunnel1,vpn-office2-tunnel2 \
