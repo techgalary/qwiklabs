@@ -55,13 +55,8 @@ cd valkyrie-app
 ```
 docker run -p 8080:8080 $DOCKER_IMAGE:$TAG &
 ```
-#### Check the lab completion progress
-```
-cd ..
-cd marking
-./step2_v2.sh
-bash ~/marking/step2_v2.sh
-```
+
+
 ### Task 3. Push the Docker image to the Artifact Registry ###
 ```
 cd ..
