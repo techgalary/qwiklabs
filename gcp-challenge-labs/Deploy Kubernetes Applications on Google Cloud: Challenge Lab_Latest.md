@@ -40,12 +40,7 @@ docker build -t $DOCKER_IMAGE:$TAG .
 ```
 docker images
 ```
-#### Check the lab completion progress
-```
-cd ..
-cd marking
-./step1_v2.sh
-```
+
 ### Task 2. Test the created Docker image ###
 ```
 cd ..
