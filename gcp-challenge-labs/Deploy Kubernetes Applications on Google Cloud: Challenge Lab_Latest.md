@@ -7,7 +7,7 @@
 ```
 export REPO=valkyrie-docker
 export DOCKER_IMAGE=valkyrie-app
-export TAG=v0.0.1
+export TAG=v0.0.2
 export ZONE=us-east4-a
 export REGION=us-east4
 ```
