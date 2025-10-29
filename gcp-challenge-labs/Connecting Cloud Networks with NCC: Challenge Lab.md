@@ -16,7 +16,7 @@ gcloud config set compute/region $REGION
 gcloud compute vpn-tunnels list
 
 ```
-#### Step 2: Create Routing VPC
+#### Step 2: Create Routing VPC (only create if its not present or skip)
 ```
 gcloud compute networks create routing-vpc \
     --subnet-mode=custom
