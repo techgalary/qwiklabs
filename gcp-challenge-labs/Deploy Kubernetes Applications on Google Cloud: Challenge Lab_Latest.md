@@ -20,7 +20,7 @@ source <(gsutil cat gs://spls/gsp318/script.sh)
 ```
 gsutil cp gs://spls/gsp318/valkyrie-app.tgz .
 tar -xzf valkyrie-app.tgz
-cd valkyrie-app
+cd valkyrie-app/source
 ```
 
 #### Create valkyrie-app/Dockerfile and add the configuration below ####
