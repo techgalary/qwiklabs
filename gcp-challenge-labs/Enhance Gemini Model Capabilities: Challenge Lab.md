@@ -1,8 +1,8 @@
 ## 🚀 Enhance Gemini Model Capabilities: Challenge Lab | [GSP525](https://www.cloudskillsboost.google/course_templates/1241/labs/564289)
 
-## Youtube link [Here]()
+### Youtube link [Here]()
 
-## 🌐 **Guide to Complete the Challenge Lab**
+### 🌐 **Guide to Complete the Challenge Lab**
 
 ### Task 1. Open the notebook in Vertex AI Workbench ###
 Task 1. Import libraries and install the Gen AI SDK
@@ -17,12 +17,16 @@ Task 1. Import libraries and install the Gen AI SDK
 In this task, you'll use the Gemini 2.5 Flash to write and execute Python code to perform a simple data analysis task, such as calculating the average price of a list of basketball sneakers.
  ### Generate and Execute Code using Gemini 2.5 Flash ###
  #### 1. Define the code execution tool
- code_execution_tool = Tool(code_execution=ToolCodeExecution())
- # 2. Define the prompt with the code to be executed
- PROMPT = f"""Use Python to calculate the average price of the sneakers in the list:
+ ```bash
+code_execution_tool = Tool(code_execution=ToolCodeExecution())
+```
+ #### 2. Define the prompt with the code to be executed
+ ```bash
+PROMPT = f"""Use Python to calculate the average price of the sneakers in the list:
 {sneaker_prices}
 Generate and run code for the calculation."""
-
+```
+```bash
 response = client.models.generate_content(
     model=MODEL_ID,
     contents=PROMPT,
@@ -31,20 +35,26 @@ response = client.models.generate_content(
         temperature=0,
     ),
 )
- 
+```
 
 ### Task 3. Grounding with Google Search
-In this task, you'll use Gemini 2.5 Flash with grounding to enhance the accuracy and relevance of Gemini's responses to questions about retail products.
+##### In this task, you'll use Gemini 2.5 Flash with grounding to enhance the accuracy and relevance of Gemini's responses to questions about retail products.
 
+```bash
 from google.genai.types import GenerateContentConfig, GoogleSearch, Tool
+```
 
-# 1. Define the Google Search tool
+##### 1. Define the Google Search tool
+```bash
 google_search_tool = Tool(google_search=GoogleSearch())
+```
 
-# 2. Define the prompt with grounding
+##### 2. Define the prompt with grounding
+``` bash
 prompt = "Find key features and price information for Nike Air Jordan XXXVI."
-
-# 3. Generate a response with grounding
+```
+##### 3. Generate a response with grounding
+```bash
 response = client.models.generate_content(
     model=MODEL_ID,
     contents=prompt,
@@ -56,10 +66,11 @@ response = client.models.generate_content(
 
 # Print the response
 print(response.text)
+```
+#### Task 4. Extract Competitor Pricing and Structure Response with JSON Schema
+##### In this task, you'll use Gemini 2.5 Flash to retrieve information about a basketball sneaker and its pricing sold by a competitor, returning the data in a structured format using a provided JSON schema.
 
-Task 4. Extract Competitor Pricing and Structure Response with JSON Schema
-In this task, you'll use Gemini 2.5 Flash to retrieve information about a basketball sneaker and its pricing sold by a competitor, returning the data in a structured format using a provided JSON schema.
-
+```bash
 from google.genai.types import GenerateContentConfig, GoogleSearch, Tool
 from IPython.display import Markdown, display
 import json
@@ -100,3 +111,4 @@ for model in sneaker_models:
         
         print(response.text)
 
+```
