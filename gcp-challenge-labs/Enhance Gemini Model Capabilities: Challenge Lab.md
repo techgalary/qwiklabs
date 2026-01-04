@@ -1,4 +1,4 @@
-## 🚀 Enhance Gemini Model Capabilities: Challenge Lab | [GSP525](https://www.cloudskillsboost.google/course_templates/1241/labs/564289)
+## 🚀 Enhance Gemini Model Capabilities: Challenge Lab | [GSP525](https://www.skills.google/catalog_lab/31978)
 
 ### Youtube link [Here]()
 
