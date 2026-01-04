@@ -5,13 +5,13 @@
 ### 🌐 **Guide to Complete the Challenge Lab**
 
 ### Task 1. Open the notebook in Vertex AI Workbench ###
-Task 1. Import libraries and install the Gen AI SDK
-1. Install Google Gen AI SDK for Python¶
+#### Task 1. Import libraries and install the Gen AI SDK
+###### 1. Install Google Gen AI SDK for Python
 2. Restart current runtime
 3. Import Libraries
 4. Set Google Cloud project information and initialize Google Gen AI SDK'
 5. Load the Gemini 2.5 Flash model
-#### Follow the Guide
+######
 
 ### Task 2. Execute code with Gemini ###
 In this task, you'll use the Gemini 2.5 Flash to write and execute Python code to perform a simple data analysis task, such as calculating the average price of a list of basketball sneakers.
@@ -26,23 +26,9 @@ PROMPT = f"""Use Python to calculate the average price of the sneakers in the li
 {sneaker_prices}
 Generate and run code for the calculation."""
 ```
-```bash
-response = client.models.generate_content(
-    model=MODEL_ID,
-    contents=PROMPT,
-    config=GenerateContentConfig(
-        tools=[code_execution_tool],
-        temperature=0,
-    ),
-)
-```
 
 ### Task 3. Grounding with Google Search
 ##### In this task, you'll use Gemini 2.5 Flash with grounding to enhance the accuracy and relevance of Gemini's responses to questions about retail products.
-
-```bash
-from google.genai.types import GenerateContentConfig, GoogleSearch, Tool
-```
 
 ##### 1. Define the Google Search tool
 ```bash
@@ -70,21 +56,8 @@ print(response.text)
 #### Task 4. Extract Competitor Pricing and Structure Response with JSON Schema
 ##### In this task, you'll use Gemini 2.5 Flash to retrieve information about a basketball sneaker and its pricing sold by a competitor, returning the data in a structured format using a provided JSON schema.
 
-```bash
-from google.genai.types import GenerateContentConfig, GoogleSearch, Tool
-from IPython.display import Markdown, display
-import json
-
-# 1. Define the basketball sneaker models
-sneaker_models = ["Under Armour Curry Flow 9", "Sketchers Slip-ins: Glide-Step Pro"]
-
-# 2. Define the online retailers
-retailers = ["Foot Locker", "Nordstrom"]
-
-# 3. Initialize an empty list to store the extracted data
-extracted_data = []
-
-# 4. Loop through the sneaker models and retailers to extract pricing information
+##### 4. Loop through the sneaker models and retailers to extract pricing information
+``` bash
 for model in sneaker_models:
     for retailer in retailers:
         # 5. Construct the search query
