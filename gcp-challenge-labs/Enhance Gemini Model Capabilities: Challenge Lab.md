@@ -1,6 +1,6 @@
 ## 🚀 Enhance Gemini Model Capabilities: Challenge Lab | [GSP525](https://www.skills.google/catalog_lab/31978)
 
-### Youtube link [Here]()
+### Youtube link [Here](https://youtu.be/nowZDjNaC18)
 
 ### 🌐 **Guide to Complete the Challenge Lab**
 
