@@ -6,12 +6,13 @@
 
 ### Task 1. Open the notebook in Vertex AI Workbench ###
 #### Task 1. Import libraries and install the Gen AI SDK
-###### 1. Install Google Gen AI SDK for Python
+``` bash
+1. Install Google Gen AI SDK for Python
 2. Restart current runtime
 3. Import Libraries
 4. Set Google Cloud project information and initialize Google Gen AI SDK'
 5. Load the Gemini 2.5 Flash model
-######
+```
 
 ### Task 2. Execute code with Gemini ###
 In this task, you'll use the Gemini 2.5 Flash to write and execute Python code to perform a simple data analysis task, such as calculating the average price of a list of basketball sneakers.
