@@ -184,11 +184,6 @@ EOF
 gcloud monitoring dashboards update $DASHBOARD_ID \
     --config-from-file=media-dashboard-updated.json
 ```
-### Key Notes for Task 4:
-- **OpenCensus metric name**: `custom.googleapis.com/opencensus/my.videoservice.org/measure/input_queue_size`
-- **Log-based metric name**: `logging.googleapis.com/user/big_video_upload_rate`
-- **etag requirement**: The dashboard update requires the current `etag` for concurrency control
-- Both charts use 60-second alignment periods with appropriate aggregation methods
 ---
 ## Task 5: Create Cloud Operations Alert Based on High Resolution Video Upload Rate
 Create a custom alert that triggers when the upload rate for high resolution videos (4K or 8K) exceeds the specified threshold.
@@ -260,8 +255,3 @@ EOF_END
 # Create the alert policy
 gcloud alpha monitoring policies create --policy-from-file=quickgcplab.json
 ```
-### Key Notes for Task 5:
-- **Trigger threshold**: The alert triggers when upload rate exceeds `$VALUE` (typically 4) per second
-- **Metric used**: `logging.googleapis.com/user/big_video_upload_rate` from Task 3
-- **Aggregation**: Uses `ALIGN_RATE` to calculate the rate of uploads
-- **Notification**: Sends email alerts via the configured notification channel
